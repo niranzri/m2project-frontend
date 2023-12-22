@@ -1,10 +1,11 @@
 import FlightsBrowser from "../components/FlightsBrowser";
 
-function MyFlights() {
+function HomePage() {
   return (
     <>
-      <FlightsBrowser />
+        <h1>Home page </h1>
+        <FlightsBrowser />
     </>
   );
 }
-export default MyFlights;
+export default HomePage;
