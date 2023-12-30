@@ -1,5 +1,5 @@
 
-function MyFlights () {
+function MyFlightsPage () {
     return (
         <>
             <h1> My flights</h1>
@@ -8,4 +8,4 @@ function MyFlights () {
 
 }
 
-export default MyFlights;
+export default MyFlightsPage;

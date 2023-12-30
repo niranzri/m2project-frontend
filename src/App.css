@@ -1,9 +1,40 @@
-/*#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+}
+
+/*
+font-family: 'Abel', sans-serif;
+font-family: 'Big Shoulders Display', sans-serif;
+font-family: 'Big Shoulders Stencil Display', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Oswald', sans-serif;
+font-family: 'Roboto', sans-serif;
+*/
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative; /* needed for absolute positioning within*/
+}
+
+.mainCtn {
+  background-image: url('./images/cover3.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex: 1;
+  margin-top: 90px;
+  margin-bottom: 60px;
+  height: calc(100vh - 170px);
+  overflow-y: auto; /* adds scroll if content overflows */
+}
+
 
 
 
