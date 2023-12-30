@@ -29,7 +29,9 @@ body {
 }
 
 .mainCtn {
-  background-image: url('./images/cover3.jpg');
+  display: flex;
+  justify-content: center;
+  background-image: url('./images/cover5.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   flex: 1;
@@ -39,11 +41,25 @@ body {
   overflow-y: auto; /* adds scroll if content overflows */
 }
 
+.coverImageAbout {
+  background-image: url('./images/cover5.jpg');
+  background-position: center;
+}
+
+.coverImageHome {
+  background-image: url('./images/cover3.jpg');
+}
+
+.coverImageMyFlights {
+  background-image: url('./images/cover1.jpg');
+  background-position: center;
+}
+
 h1 {
   color: white;
   text-align:center;
-  padding-top: 20px;
   font-size: 1.8rem;
+  padding-top: 70px;
 }
 
 

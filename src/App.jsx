@@ -15,7 +15,6 @@ function App() {
   return (
     <div className="wrapper">
       <Navbar />
-      <div className="mainCtn"> 
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={< AboutPage />} />
@@ -24,7 +23,6 @@ function App() {
           <Route path="/myflights" element={< MyFlightsPage />} />
           <Route path="*" element={<ErrorPage />} />
           </Routes>
-      </div>
       <Footer />
     </div>
   );
