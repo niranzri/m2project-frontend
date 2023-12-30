@@ -17,6 +17,10 @@ font-family: 'Oswald', sans-serif;
 font-family: 'Roboto', sans-serif;
 */
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -33,6 +37,13 @@ font-family: 'Roboto', sans-serif;
   margin-bottom: 60px;
   height: calc(100vh - 170px);
   overflow-y: auto; /* adds scroll if content overflows */
+}
+
+h1 {
+  color: white;
+  text-align:center;
+  padding-top: 20px;
+  font-size: 1.8rem;
 }
 
 

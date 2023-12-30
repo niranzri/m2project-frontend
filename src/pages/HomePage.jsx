@@ -3,8 +3,8 @@ import FlightsBrowser from "../components/FlightsBrowser";
 function HomePage() {
   return (
     <>
-        <h1>Home page </h1>
-        <FlightsBrowser />
+      <h1> Home page </h1>
+      <FlightsBrowser />
     </>
   );
 }

@@ -12,9 +12,9 @@ function Navbar () {
                 <img src={appLogo} alt="appLogo" className={classes.logo}/>
             </div>
             <div className={classes.linksCtn}>
-                <NavLink to="/AboutPage" className={classes.link}> About </NavLink>
+                <NavLink to="/about" className={classes.link}> About </NavLink>
                 <NavLink to="/" className={classes.link}> Flights Browser </NavLink>
-                <NavLink to="/MyFlightsPage" className={classes.link}> My Flights </NavLink>
+                <NavLink to="/myflights" className={classes.link}> My Flights </NavLink>
             </div>
             <div className={classes.loginCtn}>                                
                 <FontAwesomeIcon icon={faUser} size="2xl" />

@@ -9,7 +9,7 @@ import AboutPage from "./pages/AboutPage";
 import ErrorPage from "./pages/ErrorPage";
 import FlightsListPage from "./pages/FlightsListPage";
 import FlightDetailsPage from "./pages/FlightDetailsPage";
-import MyFlights from "./pages/MyFlightsPage.jsx";
+import MyFlightsPage from "./pages/MyFlightsPage";
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={< AboutPage />} />
-          <Route path="/flights" element={< FlightsListPage />} />
+          <Route path="/flightslist" element={< FlightsListPage />} />
           <Route path="/flights/:id" element={< FlightDetailsPage />} />
-          <Route path="/myflights" element={< MyFlights />} />
+          <Route path="/myflights" element={< MyFlightsPage />} />
           <Route path="*" element={<ErrorPage />} />
           </Routes>
       </div>

@@ -11,3 +11,16 @@ footer {
     text-transform: uppercase;
     padding: 0 1%;
 }
+
+.logoCtn {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1%;
+}
+
+.logo {
+    height: 100%;
+    width: auto;
+}
