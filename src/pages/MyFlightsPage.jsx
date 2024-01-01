@@ -1,7 +1,7 @@
 
 function MyFlightsPage () {
     return (
-        <div className="mainCtn coverImageMyFlights"> 
+        <div className="mainCtn myFlights"> 
             <h1> My flights </h1>
         </div>
     )

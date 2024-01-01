@@ -3,7 +3,7 @@ import Noe from '../images/Noe.jpeg';
 
 function AboutPage () {
     return (
-    <div className="mainCtn coverImageAbout"> 
+    <div className="mainCtn about"> 
         <div className={classes.aboutCtn}>
             <div className={classes.aboutText}>
                 <h1> Elevating Your Expectations Since 1992 </h1>

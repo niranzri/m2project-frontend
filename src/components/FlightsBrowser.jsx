@@ -1,41 +1,55 @@
 import React from 'react';
+import Select from 'react-select';
 import { useState } from "react";
 import classes from '../styles/flightsbrowser.module.css';
 
 function FlightsBrowser () {
-    const [origin, setOrigin] = useState ('')
-    const [destination, setDestination] = useState ('')
+    const [selectedOrigin, setSelectedOrigin] = useState ('')
+    const [selectedDestination, setSelectedDestination] = useState ('')
     const [date, setDate] = useState ('')
 
-    const handleOriginInput = event => setOrigin(event.target.value);
-    const handleDestinationInput = event => setDestination(event.target.value);
+    // not necessary b/c the Select component automatically handles the selection of options
+    //const handleOriginInput = event => setOrigin(event.target.value);
+    //const handleDestinationInput = event => setDestination(event.target.value);
     const handleDateInput = event => setDate(event.target.value);
 
     const handleSubmit = event => {
         event.preventDefault();
     }
 
+    const originOptions = [
+        {value: 'Madrid', label: 'Madrid'},
+        {value: 'Barcelona', label: 'Barcelona'},
+        {value: 'Amsterdam', label: 'Amsterdam'},
+        {value: 'London', label: 'London'},
+        {value: 'New York', label: 'New York'}
+    ];
+    const destinationOptions = [
+        {value: 'Paris', label: 'Paris'},
+        {value: 'Rome', label: 'Rome'}, 
+        {value: 'Berlin', label: 'Berlin'},
+        {value: 'Tokyo', label: 'Tokyo'},
+        {value: 'Sydney', label: 'Sydney'},
+    ];
+
     return (
         <div className={classes.browserCtn}>
-            <h2> Where do you want to go? </h2>
             <form onSubmit={handleSubmit}>
                 <div className={classes.inputCtn}>
                     <label> Origin </label>
-                    <input 
-                        type="text"
-                        name="origin"
-                        value={origin}
-                        onChange={handleOriginInput}
+                    <Select 
+                        options={originOptions} 
+                        value={selectedOrigin}
+                        onChange={selectedOption => setSelectedOrigin(selectedOption)}
                     />
                 </div>
 
                 <div className={classes.inputCtn}>
                     <label> Destination </label>
-                    <input
-                        type="text"
-                        name="destination"
-                        value={destination}
-                        onChange={handleDestinationInput}
+                    <Select 
+                        options={destinationOptions} 
+                        value={selectedDestination}
+                        onChange={selectedOption => setSelectedDestination(selectedOption)}
                     />
                 </div>
 

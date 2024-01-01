@@ -17,8 +17,9 @@ font-family: 'Oswald', sans-serif;
 font-family: 'Roboto', sans-serif;
 */
 
-body {
+html, body {
   font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 .wrapper {
@@ -30,8 +31,7 @@ body {
 
 .mainCtn {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background-image: url('./images/cover5.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -42,25 +42,39 @@ body {
   overflow-y: auto; /* adds scroll if content overflows */
 }
 
-.coverImageAbout {
+.about {
   background-image: url('./images/cover5.jpg');
   background-position: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.coverImageHome {
+.home {
   background-image: url('./images/cover3.jpg');
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.coverImageMyFlights {
+.myFlights {
   background-image: url('./images/cover1.jpg');
   background-position: center;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
   color: white;
-  text-align:center;
+  text-align: center;
   font-size: 1.8rem;
   padding-top: 70px;
+}
+
+h2 {
+  color: #529eee; 
+  color: #08225a;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 5%;
 }
 
 
