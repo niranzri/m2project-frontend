@@ -5,11 +5,10 @@
     text-align: center;
     width: 50%;
     line-height: 1.8;
-    margin-top: 80px;
+    overflow: auto;
 }
 
 .aboutCtn h1 {
-    /*filter: drop-shadow(1px 1px 2px #cbd3f3);*/
     padding: 20px;
 }
 

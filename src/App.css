@@ -31,6 +31,7 @@ body {
 .mainCtn {
   display: flex;
   justify-content: center;
+  align-items: center;
   background-image: url('./images/cover5.jpg');
   background-size: cover;
   background-repeat: no-repeat;
