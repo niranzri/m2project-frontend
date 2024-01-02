@@ -1,9 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { FlightsContext } from '../contexts/FlightsContext'
 import classes from '../styles/flightsbrowser.module.css';
 
 function FlightsBrowser () {
+    const { flights } = useContext(FlightsContext) 
+
     const [selectedOrigin, setSelectedOrigin] = useState ('')
     const [selectedDestination, setSelectedDestination] = useState ('')
     const [date, setDate] = useState ('')
