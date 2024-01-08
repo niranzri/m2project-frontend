@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 
 import Navbar from "./components/Navbar.jsx";
@@ -14,20 +14,21 @@ import MyFlightsPage from "./pages/MyFlightsPage";
 import { FlightsContext } from "./contexts/FlightsContext.jsx";
 
 function App() {
-  const { isLoading } = useContext(FlightsContext)
+  const { isLoading } = useContext(FlightsContext);
 
-  return isLoading ? (<h1>Loading...</h1>) : 
-  (
+  return isLoading ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className="wrapper">
       <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={< AboutPage />} />
-          <Route path="/flights" element={< FlightsListPage />} />
-          <Route path="/flights/:id" element={< FlightDetailsPage />} />
-          <Route path="/myflights" element={< MyFlightsPage />} />
-          <Route path="*" element={<ErrorPage />} />
-          </Routes>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/flights" element={<FlightsListPage />} />
+        <Route path="/flights/:flightId" element={<FlightDetailsPage />} />
+        <Route path="/myflights" element={<MyFlightsPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
       <Footer />
     </div>
   );
