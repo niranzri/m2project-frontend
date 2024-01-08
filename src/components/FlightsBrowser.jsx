@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom"
 import { FlightsContext } from '../contexts/FlightsContext'
 import classes from '../styles/flightsbrowser.module.css';
 
@@ -11,6 +12,8 @@ function FlightsBrowser () {
     const [selectedDestination, setSelectedDestination] = useState ('')
     const [date, setDate] = useState ('')
 
+    const navigate = useNavigate();
+
     // not necessary b/c the Select component automatically handles the selection of options
     //const handleOriginInput = event => setOrigin(event.target.value);
     //const handleDestinationInput = event => setDestination(event.target.value);
@@ -18,24 +21,19 @@ function FlightsBrowser () {
 
     const handleSubmit = event => {
         event.preventDefault();
+        //console.log("Selected origin: ", selectedOrigin.value);
+        //console.log("Selected destination: ", selectedDestination.value);
+        //console.log("Selected date: ", date);
+        navigate('/flights', {
+            state: {
+                selectedOrigin: selectedOrigin.value,
+                selectedDestination: selectedDestination.value,
+                date: date,
+            }
+        })
     }
 
-    /* sample arrays (no longer needed, here for reference)
-    const originOptions = [
-        {value: 'Madrid', label: 'Madrid'},
-        {value: 'Barcelona', label: 'Barcelona'},
-        {value: 'Amsterdam', label: 'Amsterdam'},
-        {value: 'London', label: 'London'},
-        {value: 'New York', label: 'New York'}
-    ];
-    const destinationOptions = [
-        {value: 'Paris', label: 'Paris'},
-        {value: 'Rome', label: 'Rome'}, 
-        {value: 'Berlin', label: 'Berlin'},
-        {value: 'Tokyo', label: 'Tokyo'},
-        {value: 'Sydney', label: 'Sydney'},
-    ];*/
-
+    // arrays of unique origins and destinations
     const originOptions = flights.reduce((acc, flight) => {
         if (acc.findIndex(item => item.value === flight.departure_city) === -1) {
           acc.push({value: flight.departure_city, label: flight.departure_city});

@@ -1,11 +1,45 @@
 .flightCtn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    height: auto;
+
+    background-color: white;
+    color: black;
 }
 
-.flightCtn p {
-    color: white;  
+.logoCtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: 20%;
+}
+
+  .logo {
+    width: 100px; 
+    height: auto;
+    padding: 10px;
+  }
+
+.detailsCtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: blue;
+    width: 80%;
+}
+
+.priceCtn {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    width: 20%;
 }
