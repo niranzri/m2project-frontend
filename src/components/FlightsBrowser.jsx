@@ -1,9 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { FlightsContext } from '../contexts/FlightsContext'
 import classes from '../styles/flightsbrowser.module.css';
 
 function FlightsBrowser () {
+    const { flights } = useContext(FlightsContext) 
+
     const [selectedOrigin, setSelectedOrigin] = useState ('')
     const [selectedDestination, setSelectedDestination] = useState ('')
     const [date, setDate] = useState ('')
@@ -17,6 +20,7 @@ function FlightsBrowser () {
         event.preventDefault();
     }
 
+    /* sample arrays (no longer needed, here for reference)
     const originOptions = [
         {value: 'Madrid', label: 'Madrid'},
         {value: 'Barcelona', label: 'Barcelona'},
@@ -30,7 +34,21 @@ function FlightsBrowser () {
         {value: 'Berlin', label: 'Berlin'},
         {value: 'Tokyo', label: 'Tokyo'},
         {value: 'Sydney', label: 'Sydney'},
-    ];
+    ];*/
+
+    const originOptions = flights.reduce((acc, flight) => {
+        if (acc.findIndex(item => item.value === flight.departure_city) === -1) {
+          acc.push({value: flight.departure_city, label: flight.departure_city});
+        }
+        return acc;
+      }, []);
+
+      const destinationOptions = flights.reduce((acc, flight) => {
+        if (acc.findIndex(item => item.value === flight.arrival_city) === -1) {
+          acc.push({value: flight.arrival_city, label: flight.arrival_city});
+        }
+        return acc;
+      }, []);
 
     return (
         <div className={classes.browserCtn}>
