@@ -31,26 +31,6 @@ function FlightsListPage () {
         )
     })
 
-    const durationFlights = flights.map (flight => {
-        // destructures departure and arrival time into hours and minutes and converts these to numbers
-        const [depHours, depMinutes] = flight.departure_time.split(':').map(Number);
-        const [arrHours, arrMinutes] = flight.arrival_time.split(':').map(Number);
-
-        // converting arrival and departure time to minutes
-        const depInMinutes = depHours*60 + depMinutes;
-        const arrInMinutes = arrHours*60 + arrMinutes;
-
-        let difference = arrInMinutes - depInMinutes;
-
-        const hours = Math.floor(difference / 60);
-        const mins = difference % 60;
-
-        return {
-            id: flight.id,
-            durationElement: <p key={flight.id}>{hours}h {mins}mins</p>
-        };
-    })
-
     const airlineLogos = {
         'American Airlines': americanLogo,
         'Delta Air Lines': deltaLogo,
@@ -62,7 +42,25 @@ function FlightsListPage () {
     return (
         <div className="mainCtn"> 
             <h1> Available flights on {formattedDate}</h1>
-                {filteredFlights.map(flight => (
+                {filteredFlights.map(flight => {
+                    // destructures departure and arrival time into hours and minutes and converts these to numbers
+                    const [depHours, depMinutes] = flight.departure_time.split(':').map(Number);
+                    const [arrHours, arrMinutes] = flight.arrival_time.split(':').map(Number);
+                    const timeDifference = flight.time_difference;
+
+                    // converting arrival and departure time to minutes
+                    const depInMinutes = depHours*60 + depMinutes;
+                    const arrInMinutes = arrHours*60 + arrMinutes + timeDifference*60;
+                    console.log('Time Difference:', timeDifference);
+                    console.log('Departure Minutes:', depInMinutes);
+                    console.log('Arrival Minutes:', arrInMinutes);
+
+                    let difference = arrInMinutes - depInMinutes;
+
+                    const hours = Math.floor(difference/60);
+                    const mins = difference % 60;
+
+                    return (
                     <Link to={`/flights/${flight.id}`} key={flight.id}>
                     <div key={flight.id} className={classes.flightCtn}> 
                         <div className={classes.logoCtn}> 
@@ -74,17 +72,17 @@ function FlightsListPage () {
                         </div>
                         <div className={classes.durationCtn}>
                                 <p> direct </p>
-                                {durationFlights.find(duration => duration.id === flight.id)?.durationElement} 
-                            </div>
+                                <p key={flight.id}>{hours}h {mins}mins</p>
+                        </div>
                         <div className={classes.priceCtn}>
                             <p> <span> {flight.price} € </span></p>
                         </div>
                     </div>
                     </Link>
-                ))}
+                )}
+            )}
         </div>
     )
-
 }
 
 export default FlightsListPage;
