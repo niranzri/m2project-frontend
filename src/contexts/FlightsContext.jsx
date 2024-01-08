@@ -2,7 +2,7 @@ import { createContext, useState, useEffect} from "react";
 
 export const FlightsContext = createContext()
 
-function FlightsContextProvider ({children}) {
+function FlightsContextProvider ({ children }) {
 
     const [flights, setFlights] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

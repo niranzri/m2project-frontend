@@ -1,5 +1,6 @@
-import { useParams, useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { FlightsContext } from '../contexts/FlightsContext'
+import { useParams } from 'react-router-dom';
 
 function FlightDetailsPage () {
 
