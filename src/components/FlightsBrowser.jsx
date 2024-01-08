@@ -23,7 +23,7 @@ function FlightsBrowser () {
         event.preventDefault();
         //console.log("Selected origin: ", selectedOrigin.value);
         //console.log("Selected destination: ", selectedDestination.value);
-        //console.log("Selected date: ", date);
+        console.log("Selected date: ", date);
         navigate('/flights', {
             state: {
                 selectedOrigin: selectedOrigin.value,

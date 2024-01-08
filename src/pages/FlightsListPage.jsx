@@ -2,8 +2,12 @@ import { useContext} from 'react'
 import { FlightsContext } from '../contexts/FlightsContext'
 import classes from '../styles/flightslist.module.css';
 import { Link, useLocation } from 'react-router-dom';
-import americanLogo from '../images/american-logo.png'
 
+import americanLogo from '../images/american-logo.png'
+import deltaLogo from '../images/delta-logo.png'
+import emiratesLogo from '../images/emirates-logo.png'
+import iberiaLogo from '../images/iberia-logo.png'
+import turkishLogo from '../images/turkish-logo.png'
 
 function FlightsListPage () {
 
@@ -15,6 +19,10 @@ function FlightsListPage () {
     // destructures flights from FlightsContext
     const { flights } = useContext(FlightsContext) 
 
+    const originalDate = date;
+    const parts = originalDate.split('-'); // splits the date string by the hyphen
+    const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+
     const filteredFlights = flights.filter(flight => {
         return (
             flight.departure_city === selectedOrigin &&
@@ -23,25 +31,56 @@ function FlightsListPage () {
         )
     })
 
-    //  <Link to={`/flights/${flight.id}`}></Link>
+    const durationFlights = flights.map (flight => {
+        // destructures departure and arrival time into hours and minutes and converts these to numbers
+        const [depHours, depMinutes] = flight.departure_time.split(':').map(Number);
+        const [arrHours, arrMinutes] = flight.arrival_time.split(':').map(Number);
+
+        // converting arrival and departure time to minutes
+        const depInMinutes = depHours*60 + depMinutes;
+        const arrInMinutes = arrHours*60 + arrMinutes;
+
+        let difference = arrInMinutes - depInMinutes;
+
+        const hours = Math.floor(difference / 60);
+        const mins = difference % 60;
+
+        return {
+            id: flight.id,
+            durationElement: <p key={flight.id}>{hours}h {mins}mins</p>
+        };
+    })
+
+    const airlineLogos = {
+        'American Airlines': americanLogo,
+        'Delta Air Lines': deltaLogo,
+        'Emirates': emiratesLogo,
+        'Iberia': iberiaLogo,
+        'Turkish Airlines': turkishLogo,
+    }
 
     return (
         <div className="mainCtn"> 
-            <h1> Available flights </h1>
+            <h1> Available flights on {formattedDate}</h1>
                 {filteredFlights.map(flight => (
+                    <Link to={`/flights/${flight.id}`} key={flight.id}>
                     <div key={flight.id} className={classes.flightCtn}> 
                         <div className={classes.logoCtn}> 
-                            <img src={americanLogo} alt="airline logo" className={classes.logo}/>
+                            <img src={airlineLogos[flight.airline]} alt="airline logo"/>
                         </div>
                         <div className={classes.detailsCtn}>
-                            <p>Departure from: {flight.departure_city} </p>
-                            <p>Arrival at: {flight.arrival_city} </p>
-                            <p>Time : {flight.flight_date} </p>
+                            <p> <span> {flight.departure_time} &#8212; {flight.arrival_time} </span></p>
+                            <p> {flight.departure_airport} ({flight.departure_city}) &#8212; {flight.arrival_airport} ({flight.arrival_city}) </p>
                         </div>
+                        <div className={classes.durationCtn}>
+                                <p> direct </p>
+                                {durationFlights.find(duration => duration.id === flight.id)?.durationElement} 
+                            </div>
                         <div className={classes.priceCtn}>
-                            <p> {flight.price} € </p>
+                            <p> <span> {flight.price} € </span></p>
                         </div>
-                        </div>
+                    </div>
+                    </Link>
                 ))}
         </div>
     )

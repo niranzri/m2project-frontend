@@ -6,40 +6,55 @@
 
     margin: 20px;
     padding: 20px;
-    width: 100%;
-    height: auto;
+    width: 1200px;
 
     background-color: white;
     color: black;
+    border-radius: 10px;
 }
 
 .logoCtn {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
-    width: 20%;
+    flex: 1;
 }
 
-  .logo {
-    width: 100px; 
+img {
+    border-radius: 0;
+    width: 100%; 
     height: auto;
-    padding: 10px;
-  }
+}
+
 
 .detailsCtn {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    background-color: blue;
-    width: 80%;
+
+    padding-left: 5%;
+    flex: 3.5;
+    line-height: 1.5;
+    font-family: 'Abel', sans-serif;
+}
+
+p span {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+.durationCtn {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
 }
 
 .priceCtn {
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: green;
-    width: 20%;
+    flex: 1;
 }
