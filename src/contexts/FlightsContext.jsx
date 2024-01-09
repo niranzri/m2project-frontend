@@ -33,7 +33,7 @@ function FlightsContextProvider({ children }) {
 
   return (
     <FlightsContext.Provider
-      value={{ flights, isLoading, getFlights, getOneFlight }}
+      value={{ flights, isLoading, setFlights, getFlights, getOneFlight }}
     >
       {children}
     </FlightsContext.Provider>

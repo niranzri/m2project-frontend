@@ -4,7 +4,9 @@ import { FlightsContext } from "../contexts/FlightsContext";
 
 import classes from "../styles/flightslist.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faStar as solidStar} from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar} from '@fortawesome/free-regular-svg-icons';
+
 
 import americanLogo from "../images/american-logo.png";
 import deltaLogo from "../images/delta-logo.png";
@@ -14,9 +16,9 @@ import turkishLogo from "../images/turkish-logo.png";
 
 
 function FlightDetailsPage() {
-  const { flights } = useContext(FlightsContext);
+  const { flights, setFlights } = useContext(FlightsContext);
   const { flightId } = useParams();
-  const [flight, setFlight] = useState();
+  const [flight, setFlight] = useState({});
 
   const location = useLocation();
   const { duration } = location.state || {};
@@ -50,6 +52,20 @@ function FlightDetailsPage() {
     fetchFlight();
   }, [flightId]);
 
+
+  const toggleSave = ( flightId ) => {
+    const updatedFlights = flights.map(flight => {
+        if (flight.id === flightId) {
+            return {... flight, isSaved: !flight.isSaved}
+        }
+        return flight
+    })
+
+    setFlights(updatedFlights)
+    const updatedFlight = getOneFlight(flightId)
+    setFlight(updatedFlight)
+  }
+
   return (
     <div className="mainCtn"> 
     <h1> Flight details </h1>
@@ -70,6 +86,16 @@ function FlightDetailsPage() {
             </div>
             <div className={classes.priceCtn}>
                 <p> <span> {flight.price} € </span> </p>
+            </div>
+            <div className={classes.starCtn}>
+                <button type="button" className={classes.btnStar} onClick={()=> toggleSave(flight.id)}>
+                    {flight.isSaved ? (
+                        <FontAwesomeIcon icon={solidStar} size="xl" style={{color: "#08225a",}} />
+                    ) : (
+                        <FontAwesomeIcon icon={regularStar} size="xl" style={{color: "#08225a",}} />
+                    )};
+                </button>
+                <p> Saved? {flight.isSaved?.toString() || ''} </p>
             </div>
         </div>
       )}

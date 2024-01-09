@@ -65,6 +65,14 @@ p span {
     justify-content:center;
 }
 
+.btnStar {
+    background-color: transparent;
+}
+
+.btnStar:hover {
+    background-color: transparent;
+}
+
 .btnBack {
     background-color: #08225a;
     color: white;
