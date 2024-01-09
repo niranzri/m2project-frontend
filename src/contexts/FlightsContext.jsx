@@ -30,10 +30,26 @@ function FlightsContextProvider({ children }) {
     console.log("Found flight:", oneFlight); // Log to verify found flight
     return oneFlight;
   };
-
+  const toggleSave = (flightId) => {
+    setFlights(
+      flights.map((flight) => {
+        if (flight.id === flightId) {
+          return { ...flight, isSaved: !flight.isSaved };
+        }
+        return flight;
+      })
+    );
+  };
   return (
     <FlightsContext.Provider
-      value={{ flights, isLoading, setFlights, getFlights, getOneFlight }}
+      value={{
+        flights,
+        toggleSave,
+        isLoading,
+        setFlights,
+        getFlights,
+        getOneFlight,
+      }}
     >
       {children}
     </FlightsContext.Provider>
