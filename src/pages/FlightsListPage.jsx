@@ -64,7 +64,12 @@ function FlightsListPage() {
         const mins = difference % 60;
 
         return (
-          <Link to={`/flights/${flight.id}`}>
+          <Link 
+            key={flight.id}
+            to={{
+            pathname: `/flights/${flight.id}`,
+            state: { duration: { hours, mins } } 
+            }} >
             <div key={flight.id} className={classes.flightCtn}>
               <div className={classes.logoCtn}>
                 <img src={airlineLogos[flight.airline]} alt="airline logo" />

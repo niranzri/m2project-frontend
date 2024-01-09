@@ -1,17 +1,39 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { FlightsContext } from "../contexts/FlightsContext";
-import "../styles/flightdetails.module.css";
+
+import classes from "../styles/flightslist.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
+import americanLogo from "../images/american-logo.png";
+import deltaLogo from "../images/delta-logo.png";
+import emiratesLogo from "../images/emirates-logo.png";
+import iberiaLogo from "../images/iberia-logo.png";
+import turkishLogo from "../images/turkish-logo.png";
+
 
 function FlightDetailsPage() {
-  const { flightId } = useParams();
   const { flights } = useContext(FlightsContext);
+  const { flightId } = useParams();
   const [flight, setFlight] = useState();
+
+  const location = useLocation();
+  const { duration } = location.state || {};
+  const { hours, mins} = duration || {};
 
   const getOneFlight = (flightId) => {
     const numericFlightId = Number(flightId);
     const oneFlight = flights.find((flight) => flight.id === numericFlightId);
     return oneFlight;
+  };
+
+  const airlineLogos = {
+    "American Airlines": americanLogo,
+    "Delta Air Lines": deltaLogo,
+    "Emirates": emiratesLogo,
+    "Iberia": iberiaLogo,
+    "Turkish Airlines": turkishLogo,
   };
 
   useEffect(() => {
@@ -29,9 +51,40 @@ function FlightDetailsPage() {
   }, [flightId]);
 
   return (
-    <div className="flight-details-container">
+    <div className="mainCtn"> 
+    <h1> Flight details </h1>
       {flight && (
-        <>
+        <div className={classes.flightCtn}>
+            <div className={classes.logoCtn}>
+                <img src={airlineLogos[flight.airline]} alt="airline logo" />
+            </div>
+            <div className={classes.detailsCtn}>
+                <p> <span> {flight.departure_time} &#8212; {flight.arrival_time} </span> </p>
+                <p> {flight.departure_airport} ({flight.departure_city}) &#8212;
+                    {flight.arrival_airport} ({flight.arrival_city}) </p>
+            </div>
+            <div className={classes.durationCtn}>
+                <p> direct </p>
+                <p key={flight.id}> 
+                    {hours}h {mins}mins </p>
+            </div>
+            <div className={classes.priceCtn}>
+                <p> <span> {flight.price} € </span> </p>
+            </div>
+        </div>
+      )}
+      <div className={classes.btnCtn}>
+        <Link to="/flights">   
+            <button className={classes.btnBack}>
+                Back to List 
+            </button>
+        </Link> 
+      </div>
+    </div>
+  );
+}
+
+/*
           <p className="flight-detail">
             Departure city : {flight.departure_city}
           </p>
@@ -56,6 +109,7 @@ function FlightDetailsPage() {
       )}
     </div>
   );
-}
+  */
+
 
 export default FlightDetailsPage;
