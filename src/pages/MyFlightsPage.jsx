@@ -35,7 +35,7 @@ function MyFlightsPage() {
                 Departure city : {flight.departure_city}
               </p>
               <p className="flight-detail">
-                Departure date : {flight.departure_time}h
+                Departure time : {flight.departure_time}h
               </p>
               <p className="flight-detail">
                 Departure airport : {flight.departure_airport}
@@ -47,7 +47,7 @@ function MyFlightsPage() {
                 Arrival airport : {flight.arrival_airport}
               </p>
               <p className="flight-detail">
-                Arrival date : {flight.arrival_time}h
+                Arrival time : {flight.arrival_time}h
               </p>
               <p className="flight-detail">
                 Flight date : {flight.flight_date}
