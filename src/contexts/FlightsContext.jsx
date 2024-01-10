@@ -74,7 +74,6 @@ function FlightsContextProvider({ children }) {
         getOneFlight,
         toggleSave,
         calculateDuration,
-        formatDate
       }}
     >
       {children}
