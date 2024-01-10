@@ -8,7 +8,7 @@ function FlightsContextProvider({ children }) {
 
   const getFlights = async () => {
     try {
-      const response = await fetch("http://localhost:4000/flights");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}`);
       if (response.ok) {
         const flightsData = await response.json();
         setFlights(flightsData);
