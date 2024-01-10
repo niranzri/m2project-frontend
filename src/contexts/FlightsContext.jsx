@@ -8,7 +8,7 @@ function FlightsContextProvider({ children }) {
 
   const getFlights = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/flights`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}`);
       if (response.ok) {
         const flightsData = await response.json();
         setFlights(flightsData);
@@ -30,6 +30,7 @@ function FlightsContextProvider({ children }) {
     console.log("Found flight:", oneFlight); // Log to verify found flight
     return oneFlight;
   };
+  
   const toggleSave = (flightId) => {
     setFlights(
       flights.map((flight) => {

@@ -12,13 +12,12 @@ import turkishLogo from "../images/turkish-logo.png";
 function FlightsListPage() {
   const location = useLocation();
   // {} ensures that the variables will be set to undefined if location.state is undefined
-  // maybe create context if we need to re-use these data?
   const { selectedOrigin, selectedDestination, date } = location.state || {};
 
   // destructures flights from FlightsContext
   const { flights } = useContext(FlightsContext);
 
-  const originalDate = date;
+  const originalDate = date || '';
   const parts = originalDate.split("-"); // splits the date string by the hyphen
   const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
@@ -26,10 +25,11 @@ function FlightsListPage() {
     return (
       flight.departure_city === selectedOrigin &&
       flight.arrival_city === selectedDestination &&
-      flight.flight_date === date
+      flight.flight_date == date
     );
   });
 
+ 
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
