@@ -8,6 +8,8 @@ function MyFlightsPage() {
   const { flights, toggleSave } = useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
+  const [notes, setNotes] = useState({});
+  const [editingNoteId, setEditingNoteId] = useState(null);
 
   useEffect(() => {
     const now = new Date();
@@ -18,6 +20,13 @@ function MyFlightsPage() {
     const upcoming = savedFlights.filter(
       (flight) => new Date(flight.flight_date) >= now
     );
+    const handleNoteChange = (id, note) => {
+      setNotes({ ...notes, [id]: note });
+    };
+    const saveNote = (id) => {
+      setEditingNoteId(null);
+      // Add logic here to persist the note if needed
+    };
 
     setPastFlights(past);
     setUpcomingFlights(upcoming);
@@ -54,6 +63,7 @@ function MyFlightsPage() {
               </p>
               <p className="flight-detail">Airline : {flight.airline}</p>
               <p className="flight-detail">Price : {flight.price}</p>
+
               <button
                 type="button"
                 className={classes.btnStar}
@@ -73,6 +83,26 @@ function MyFlightsPage() {
                   />
                 )}
               </button>
+              <button
+                type="button"
+                className={classes.btnNote}
+                onClick={() => setEditingNoteId(flight.id)}
+              >
+                <FontAwesomeIcon icon={faPencilAlt} /> Add Note
+              </button>
+              {editingNoteId === flight.id && (
+                <>
+                  <textarea
+                    value={notes[flight.id] || ""}
+                    onChange={(e) =>
+                      handleNoteChange(flight.id, e.target.value)
+                    }
+                  />
+                  <button onClick={() => saveNote(flight.id)}>
+                    <FontAwesomeIcon icon={faCheck} size="sm" />
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -122,6 +152,26 @@ function MyFlightsPage() {
                   />
                 )}
               </button>
+              <button
+                type="button"
+                className={classes.btnNote}
+                onClick={() => setEditingNoteId(flight.id)}
+              >
+                <FontAwesomeIcon icon={faPencilAlt} /> Add Note
+              </button>
+              {editingNoteId === flight.id && (
+                <>
+                  <textarea
+                    value={notes[flight.id] || ""}
+                    onChange={(e) =>
+                      handleNoteChange(flight.id, e.target.value)
+                    }
+                  />
+                  <button onClick={() => saveNote(flight.id)}>
+                    <FontAwesomeIcon icon={faCheck} size="sm" />
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>
