@@ -12,14 +12,22 @@ import turkishLogo from "../images/turkish-logo.png";
 function FlightsListPage() {
   const location = useLocation();
   // {} ensures that the variables will be set to undefined if location.state is undefined
-  const { selectedOrigin, selectedDestination, date } = location.state || {};
+  let { selectedOrigin, selectedDestination, date } = location.state || {};
 
   // destructures flights from FlightsContext
-  const { flights, calculateDuration } = useContext(FlightsContext);
+  const { flights, calculateDuration, formatDate } = useContext(FlightsContext);
+
+  if (!location.state) {
+    selectedOrigin = localStorage.getItem('selectedOrigin');
+    selectedDestination = localStorage.getItem('selectedDestination');
+    date = localStorage.getItem('date');
+  }
+
 
   const originalDate = date || '';
   const parts = originalDate.split("-"); // splits the date string by the hyphen
   const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+
 
   const filteredFlights = flights.filter((flight) => {
     return (

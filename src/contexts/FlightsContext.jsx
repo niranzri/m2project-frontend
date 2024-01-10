@@ -64,7 +64,6 @@ function FlightsContextProvider({ children }) {
     return {hours, mins};
   };
 
-
   return (
     <FlightsContext.Provider
       value={{
@@ -75,6 +74,7 @@ function FlightsContextProvider({ children }) {
         getOneFlight,
         toggleSave,
         calculateDuration,
+        formatDate
       }}
     >
       {children}

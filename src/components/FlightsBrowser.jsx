@@ -31,6 +31,10 @@ function FlightsBrowser () {
                 date: date,
             }
         })
+
+        localStorage.setItem('selectedOrigin', selectedOrigin.value);
+        localStorage.setItem('selectedDestination', selectedDestination.value);
+        localStorage.setItem('date', date);
     }
 
     // arrays of unique origins and destinations
