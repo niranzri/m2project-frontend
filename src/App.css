@@ -20,6 +20,13 @@ font-family: 'Roboto', sans-serif;
 html, body {
   font-family: 'Roboto', sans-serif;
   height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
 }
 
 .wrapper {
@@ -32,9 +39,6 @@ html, body {
 .mainCtn {
   display: flex;
   flex-direction: column;
-  background-image: url('./images/cover5.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
   flex: 1;
   margin-top: 90px;
   margin-bottom: 60px;
@@ -47,12 +51,25 @@ html, body {
   background-position: center;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .home {
   background-image: url('./images/cover3.jpg');
   justify-content: flex-start;
   align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.flightsList, .flightDetails {
+  background-image: url('./images/cover5.jpg');
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .myFlights {
@@ -60,7 +77,15 @@ html, body {
   background-position: center;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
+.error {
+  background: rgb(195,232,250);
+  background: radial-gradient(circle, rgba(195,232,250,1) 0%, rgba(44,82,162,1) 98%);
+}
+
 
 h1 {
   color: white;
@@ -70,7 +95,6 @@ h1 {
 }
 
 h2 {
-  color: #529eee; 
   color: #08225a;
   text-align: center;
   font-size: 1.8rem;
