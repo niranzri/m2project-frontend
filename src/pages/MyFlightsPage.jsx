@@ -1,22 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { FlightsContext } from "../contexts/FlightsContext";
 import classes from "../styles/myflights.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
-import {
-  faPen,
-  faCheck,
-  faPencilAlt,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
 
 function MyFlightsPage() {
-  const { flights, toggleSave } = useContext(FlightsContext);
+  const { flights } = useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
-  const [notes, setNotes] = useState({});
-  const [editingNoteId, setEditingNoteId] = useState(null);
 
   useEffect(() => {
     const now = new Date();

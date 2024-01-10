@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams, Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { FlightsContext } from "../contexts/FlightsContext";
 
 import classes from "../styles/flightslist.module.css";
@@ -24,8 +24,8 @@ function FlightDetailsPage() {
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
-    "Emirates": emiratesLogo,
-    "Iberia": iberiaLogo,
+    Emirates: emiratesLogo,
+    Iberia: iberiaLogo,
     "Turkish Airlines": turkishLogo,
   };
 
@@ -34,7 +34,6 @@ function FlightDetailsPage() {
       (flight) => flight.id === Number(flightId)
     );
     setFlight(fetchedFlight);
-    
   }, [flights, flightId]);
 
   if (flight) {
