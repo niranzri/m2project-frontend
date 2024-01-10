@@ -43,7 +43,7 @@ function FlightDetailsPage() {
   }
 
   return (
-    <div className="mainCtn">
+    <div className="mainCtn flightDetails">
       <h1> Flight details </h1>
       {flight && (
         <div className={classes.flightCtn}>

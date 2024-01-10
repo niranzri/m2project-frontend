@@ -76,8 +76,6 @@ function FlightsContextProvider({ children }) {
         getOneFlight,
         toggleSave,
         calculateDuration,
-        updateFlightNote,
-        deleteFlightNote,
         setNeedsUpdate,
       }}
     >
