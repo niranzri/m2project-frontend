@@ -31,7 +31,6 @@ function FlightsContextProvider({ children }) {
     return oneFlight;
   };
 
-  
   const toggleSave = (flightId) => {
     setFlights(
       flights.map((flight) => {

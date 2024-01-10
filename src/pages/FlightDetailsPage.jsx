@@ -16,6 +16,7 @@ import turkishLogo from "../images/turkish-logo.png";
 function FlightDetailsPage() {
   const { flights, toggleSave, calculateDuration } = useContext(FlightsContext);
   const { flightId } = useParams();
+
   const [flight, setFlight] = useState(undefined);
 
   const flightDuration = {};
