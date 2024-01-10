@@ -17,8 +17,10 @@ function FlightDetailsPage() {
   const { flights, toggleSave } = useContext(FlightsContext);
   const { flightId } = useParams();
   const [flight, setFlight] = useState({});
-
   const location = useLocation();
+
+  //console.log("Location state in FlightDetailsPage:", location.state);
+  
   const { duration } = location.state || {};
   const { hours, mins } = duration || {};
 
