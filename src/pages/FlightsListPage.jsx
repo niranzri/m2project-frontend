@@ -33,8 +33,8 @@ function FlightsListPage() {
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
-    "Emirates": emiratesLogo,
-    "Iberia": iberiaLogo,
+    Emirates: emiratesLogo,
+    Iberia: iberiaLogo,
     "Turkish Airlines": turkishLogo,
   };
 
@@ -71,15 +71,12 @@ function FlightsListPage() {
               </div>
               <div className={classes.detailsCtn}>
                 <p>
-                  {" "}
                   <span>
-                    {" "}
-                    {flight.departure_time} &#8212; {flight.arrival_time}{" "}
+                    {flight.departure_time} &#8212; {flight.arrival_time}
                   </span>
                 </p>
                 <p>
-                  {" "}
-                  {flight.departure_airport} ({flight.departure_city}) &#8212;{" "}
+                  {flight.departure_airport} ({flight.departure_city}) &#8212;
                   {flight.arrival_airport} ({flight.arrival_city}){" "}
                 </p>
               </div>
@@ -91,7 +88,6 @@ function FlightsListPage() {
               </div>
               <div className={classes.priceCtn}>
                 <p>
-                  {" "}
                   <span> {flight.price} € </span>
                 </p>
               </div>

@@ -50,7 +50,7 @@ function FlightDetailsPage() {
           <p className="flight-detail">Airline : {flight.airline}</p>
           <p className="flight-detail">Price : {flight.price}</p>
           <button className="flight-detail-button">
-            {flight.isSaved ? "⭐" : "☆"}{" "}
+            {flight.isSaved ? "⭐" : "☆"}
           </button>
         </>
       )}
