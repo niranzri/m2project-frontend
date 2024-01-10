@@ -15,7 +15,7 @@ function FlightsListPage() {
   const { selectedOrigin, selectedDestination, date } = location.state || {};
 
   // destructures flights from FlightsContext
-  const { flights } = useContext(FlightsContext);
+  const { flights, calculateDuration } = useContext(FlightsContext);
 
   const originalDate = date || '';
   const parts = originalDate.split("-"); // splits the date string by the hyphen
@@ -42,33 +42,12 @@ function FlightsListPage() {
     <div className="mainCtn">
       <h1> Available flights on {formattedDate}</h1>
       {filteredFlights.map((flight) => {
-        // destructures departure and arrival time into hours and minutes and converts these to numbers
-        const [depHours, depMinutes] = flight.departure_time
-          .split(":")
-          .map(Number);
-        const [arrHours, arrMinutes] = flight.arrival_time
-          .split(":")
-          .map(Number);
-        const timeDifference = flight.time_difference;
-
-        // converting arrival and departure time to minutes
-        const depInMinutes = depHours * 60 + depMinutes;
-        const arrInMinutes = arrHours * 60 + arrMinutes + timeDifference * 60;
-        console.log("Time Difference:", timeDifference);
-        console.log("Departure Minutes:", depInMinutes);
-        console.log("Arrival Minutes:", arrInMinutes);
-
-        let difference = arrInMinutes - depInMinutes;
-
-        const hours = Math.floor(difference / 60);
-        const mins = difference % 60;
-
+        const { hours, mins } = calculateDuration(flight);
         return (
           <Link 
             key={flight.id}
             to={{
-            pathname: `/flights/${flight.id}`,
-            state: { duration: { hours, mins } } 
+            pathname: `/flights/${flight.id}` 
             }} >
             <div key={flight.id} className={classes.flightCtn}>
               <div className={classes.logoCtn}>

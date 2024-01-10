@@ -41,15 +41,40 @@ function FlightsContextProvider({ children }) {
       })
     );
   };
+
+
+  const calculateDuration = (flight) => {
+    // destructures departure and arrival time into hours and minutes and converts these to numbers
+    const [depHours, depMinutes] = flight.departure_time.split(":").map(Number);
+    const [arrHours, arrMinutes] = flight.arrival_time.split(":").map(Number);
+    const timeDifference = flight.time_difference;
+  
+   // converting arrival and departure time to minutes
+    const depInMinutes = depHours * 60 + depMinutes;
+    const arrInMinutes = arrHours * 60 + arrMinutes + timeDifference * 60;
+    console.log("Time Difference:", timeDifference);
+    console.log("Departure Minutes:", depInMinutes);
+    console.log("Arrival Minutes:", arrInMinutes);
+  
+    let difference = arrInMinutes - depInMinutes;
+  
+    const hours = Math.floor(difference / 60);
+    const mins = difference % 60;
+
+    return {hours, mins};
+  };
+
+
   return (
     <FlightsContext.Provider
       value={{
         flights,
-        toggleSave,
         isLoading,
         setFlights,
         getFlights,
         getOneFlight,
+        toggleSave,
+        calculateDuration,
       }}
     >
       {children}

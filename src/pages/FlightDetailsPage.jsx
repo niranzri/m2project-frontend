@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import { FlightsContext } from "../contexts/FlightsContext";
 
 import classes from "../styles/flightslist.module.css";
@@ -14,15 +14,12 @@ import iberiaLogo from "../images/iberia-logo.png";
 import turkishLogo from "../images/turkish-logo.png";
 
 function FlightDetailsPage() {
-  const { flights, toggleSave } = useContext(FlightsContext);
+  const { flights, toggleSave, calculateDuration } = useContext(FlightsContext);
   const { flightId } = useParams();
-  const [flight, setFlight] = useState({});
-  const location = useLocation();
 
-  //console.log("Location state in FlightDetailsPage:", location.state);
-  
-  const { duration } = location.state || {};
-  const { hours, mins } = duration || {};
+  const [flight, setFlight] = useState(undefined);
+
+  const flightDuration = {};
 
   const airlineLogos = {
     "American Airlines": americanLogo,
@@ -37,7 +34,14 @@ function FlightDetailsPage() {
       (flight) => flight.id === Number(flightId)
     );
     setFlight(fetchedFlight);
+    
   }, [flights, flightId]);
+
+  if (flight) {
+    const response = calculateDuration(flight);
+    flightDuration.hours = response.hours;
+    flightDuration.mins = response.mins;
+  }
 
   return (
     <div className="mainCtn">
@@ -64,7 +68,7 @@ function FlightDetailsPage() {
           <div className={classes.durationCtn}>
             <p> direct </p>
             <p key={flight.id}>
-              {hours}h {mins}mins{" "}
+              {`${flightDuration?.hours}h ${flightDuration?.mins}mins`}
             </p>
           </div>
           <div className={classes.priceCtn}>
