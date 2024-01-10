@@ -2,21 +2,28 @@ import React, { useContext, useState, useEffect } from "react";
 import { FlightsContext } from "../contexts/FlightsContext";
 import classes from "../styles/myflights.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import {
+  faStar as solidStar,
+  faStar as regularStar,
   faPen,
   faCheck,
-  faPencilAlt,
+  faTimes,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 function MyFlightsPage() {
-  const { flights, toggleSave } = useContext(FlightsContext);
+  const {
+    flights,
+    setFlights,
+    toggleSave,
+    updateFlightNote,
+    getFlights,
+    setNeedsUpdate,
+  } = useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
-  const [notes, setNotes] = useState({});
-  const [editingNoteId, setEditingNoteId] = useState(null);
+  const [notes, setNotes] = useState({}); // Added missing state
+  const [editingNoteId, setEditingNoteId] = useState(null); // Added missing state
 
   useEffect(() => {
     const now = new Date();
@@ -35,25 +42,53 @@ function MyFlightsPage() {
     setNotes({ ...notes, [id]: note });
   };
 
-  const saveNote = (id) => {
+  const saveNote = (flightId) => {
+    const noteIndex = flights
+      .find((flight) => flight.id === flightId)
+      .note.findIndex((note) => note.id === editingNoteId);
+    updateFlightNote(flightId, noteIndex, notes[flightId]);
     setEditingNoteId(null);
   };
 
-  const deleteNote = (id) => {
-    const newNotes = { ...notes };
-    delete newNotes[id];
-    setNotes(newNotes);
+  // Function to delete a note
+  const removeNote = async (flightId) => {
+    console.log(flightId);
+    const flightToUpdate = flights.find((flight) => flight.id === flightId);
+    if (!flightToUpdate) return;
+
+    // Assuming each flight has only one note
+    const updatedFlight = { ...flightToUpdate, note: [] };
+
+    try {
+      // Update the local state
+      setFlights(
+        flights.map((flight) =>
+          flight.id === flightId ? updatedFlight : flight
+        )
+      );
+
+      // Update the server
+      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedFlight),
+      });
+
+      location.reload();
+    } catch (error) {
+      console.error("Error deleting flight note:", error);
+    }
   };
 
   const renderNoteButtons = (flight) => (
     <>
-      {!editingNoteId && !notes[flight.id] && (
+      {!editingNoteId && (
         <button
           type="button"
           className={classes.btnNote}
           onClick={() => setEditingNoteId(flight.id)}
         >
-          <FontAwesomeIcon icon={faPen} /> Add Note
+          <FontAwesomeIcon icon={faPen} /> Add/Edit Note
         </button>
       )}
       {editingNoteId === flight.id && (
@@ -63,22 +98,19 @@ function MyFlightsPage() {
             onChange={(e) => handleNoteChange(flight.id, e.target.value)}
           />
           <button onClick={() => saveNote(flight.id)}>
-            <FontAwesomeIcon icon={faCheck} size="sm" />
+            <FontAwesomeIcon icon={faCheck} size="sm" /> Save Note
+          </button>
+          <button onClick={() => setEditingNoteId(null)}>
+            <FontAwesomeIcon icon={faTimes} size="sm" /> Cancel
           </button>
         </>
       )}
-      {!editingNoteId && notes[flight.id] && (
+      {notes[flight.id] && (
         <div>
           <p>Note: {notes[flight.id]}</p>
           <button
-            className={classes.btnNote}
-            onClick={() => setEditingNoteId(flight.id)}
-          >
-            <FontAwesomeIcon icon={faPencilAlt} /> Edit Note
-          </button>
-          <button
             className={classes.btnDeleteNote}
-            onClick={() => deleteNote(flight.id)}
+            onClick={() => removeNote(flight.id)}
           >
             <FontAwesomeIcon icon={faTrashAlt} /> Delete Note
           </button>

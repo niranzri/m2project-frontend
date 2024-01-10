@@ -5,14 +5,15 @@ export const FlightsContext = createContext();
 function FlightsContextProvider({ children }) {
   const [flights, setFlights] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [needsUpdate, setNeedsUpdate] = useState(true);
   const getFlights = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/flights`);
       if (response.ok) {
         const flightsData = await response.json();
         setFlights(flightsData);
-        console.log("Fetched flights:", flightsData); // Log to verify data
+        console.log("Fetched flights:", flightsData);
+        setNeedsUpdate(false);
         setIsLoading(false);
       }
     } catch (error) {
@@ -21,13 +22,15 @@ function FlightsContextProvider({ children }) {
   };
 
   useEffect(() => {
-    getFlights();
-  }, []);
+    if (needsUpdate) {
+      getFlights();
+    }
+  }, [needsUpdate]);
 
   const getOneFlight = (flightId) => {
     const numericFlightId = Number(flightId);
     const oneFlight = flights.find((flight) => flight.id === numericFlightId);
-    console.log("Found flight:", oneFlight); // Log to verify found flight
+    console.log("Found flight:", oneFlight);
     return oneFlight;
   };
 
@@ -42,26 +45,25 @@ function FlightsContextProvider({ children }) {
     );
   };
 
-
   const calculateDuration = (flight) => {
     // destructures departure and arrival time into hours and minutes and converts these to numbers
     const [depHours, depMinutes] = flight.departure_time.split(":").map(Number);
     const [arrHours, arrMinutes] = flight.arrival_time.split(":").map(Number);
     const timeDifference = flight.time_difference;
-  
-   // converting arrival and departure time to minutes
+
+    // converting arrival and departure time to minutes
     const depInMinutes = depHours * 60 + depMinutes;
     const arrInMinutes = arrHours * 60 + arrMinutes + timeDifference * 60;
     console.log("Time Difference:", timeDifference);
     console.log("Departure Minutes:", depInMinutes);
     console.log("Arrival Minutes:", arrInMinutes);
-  
+
     let difference = arrInMinutes - depInMinutes;
-  
+
     const hours = Math.floor(difference / 60);
     const mins = difference % 60;
 
-    return {hours, mins};
+    return { hours, mins };
   };
 
   return (
@@ -74,6 +76,9 @@ function FlightsContextProvider({ children }) {
         getOneFlight,
         toggleSave,
         calculateDuration,
+        updateFlightNote,
+        deleteFlightNote,
+        setNeedsUpdate,
       }}
     >
       {children}

@@ -18,16 +18,14 @@ function FlightsListPage() {
   const { flights, calculateDuration, formatDate } = useContext(FlightsContext);
 
   if (!location.state) {
-    selectedOrigin = localStorage.getItem('selectedOrigin');
-    selectedDestination = localStorage.getItem('selectedDestination');
-    date = localStorage.getItem('date');
+    selectedOrigin = localStorage.getItem("selectedOrigin");
+    selectedDestination = localStorage.getItem("selectedDestination");
+    date = localStorage.getItem("date");
   }
 
-
-  const originalDate = date || '';
+  const originalDate = date || "";
   const parts = originalDate.split("-"); // splits the date string by the hyphen
   const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-
 
   const filteredFlights = flights.filter((flight) => {
     return (
@@ -37,12 +35,11 @@ function FlightsListPage() {
     );
   });
 
- 
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
-    "Emirates": emiratesLogo,
-    "Iberia": iberiaLogo,
+    Emirates: emiratesLogo,
+    Iberia: iberiaLogo,
     "Turkish Airlines": turkishLogo,
   };
 
@@ -52,11 +49,12 @@ function FlightsListPage() {
       {filteredFlights.map((flight) => {
         const { hours, mins } = calculateDuration(flight);
         return (
-          <Link 
+          <Link
             key={flight.id}
             to={{
-            pathname: `/flights/${flight.id}` 
-            }} >
+              pathname: `/flights/${flight.id}`,
+            }}
+          >
             <div key={flight.id} className={classes.flightCtn}>
               <div className={classes.logoCtn}>
                 <img src={airlineLogos[flight.airline]} alt="airline logo" />
