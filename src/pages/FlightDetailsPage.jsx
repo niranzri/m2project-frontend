@@ -14,25 +14,21 @@ import iberiaLogo from "../images/iberia-logo.png";
 import turkishLogo from "../images/turkish-logo.png";
 
 function FlightDetailsPage() {
-  const { flights, setFlights, toggleSave } = useContext(FlightsContext);
+  const { flights, toggleSave } = useContext(FlightsContext);
   const { flightId } = useParams();
   const [flight, setFlight] = useState({});
-
   const location = useLocation();
+
+  //console.log("Location state in FlightDetailsPage:", location.state);
+  
   const { duration } = location.state || {};
   const { hours, mins } = duration || {};
-
-  const getOneFlight = (flightId) => {
-    const numericFlightId = Number(flightId);
-    const oneFlight = flights.find((flight) => flight.id === numericFlightId);
-    return oneFlight;
-  };
 
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
-    Emirates: emiratesLogo,
-    Iberia: iberiaLogo,
+    "Emirates": emiratesLogo,
+    "Iberia": iberiaLogo,
     "Turkish Airlines": turkishLogo,
   };
 
@@ -109,32 +105,5 @@ function FlightDetailsPage() {
     </div>
   );
 }
-
-/*
-          <p className="flight-detail">
-            Departure city : {flight.departure_city}
-          </p>
-          <p className="flight-detail">
-            Departure date : {flight.departure_date}
-          </p>
-          <p className="flight-detail">
-            Departure airport : {flight.departure_airport}
-          </p>
-          <p className="flight-detail">Arrival city : {flight.arrival_city}</p>
-          <p className="flight-detail">
-            Arrival airport : {flight.arrival_airport}
-          </p>
-          <p className="flight-detail">Arrival date : {flight.arrival_date}</p>
-          <p className="flight-detail">Flight date : {flight.flight_date}</p>
-          <p className="flight-detail">Airline : {flight.airline}</p>
-          <p className="flight-detail">Price : {flight.price}</p>
-          <button className="flight-detail-button">
-            {flight.isSaved ? "⭐" : "☆"}{" "}
-          </button>
-        </>
-      )}
-    </div>
-  );
-  */
 
 export default FlightDetailsPage;
