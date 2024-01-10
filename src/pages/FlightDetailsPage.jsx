@@ -24,8 +24,8 @@ function FlightDetailsPage() {
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
-    Emirates: emiratesLogo,
-    Iberia: iberiaLogo,
+    "Emirates": emiratesLogo,
+    "Iberia": iberiaLogo,
     "Turkish Airlines": turkishLogo,
   };
 
