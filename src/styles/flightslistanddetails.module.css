@@ -89,3 +89,11 @@ p span {
 .btnBack:hover {
     background-color: #529eee; 
 }
+
+.noFlightsText {
+    padding: 50px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.7rem;
+    color: white;
+}
+

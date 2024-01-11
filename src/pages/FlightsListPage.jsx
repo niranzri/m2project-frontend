@@ -41,6 +41,8 @@ function FlightsListPage() {
 
   return (
     <div className="mainCtn flightsList">
+      {filteredFlights.length > 0 ? (
+      <>
       <h1> Available flights on {formatDate(selectedDate)}</h1>
       {filteredFlights.map((flight) => {
         const { hours, mins } = calculateDuration(flight);
@@ -81,8 +83,21 @@ function FlightsListPage() {
           </Link>
         );
       })}
+      </>
+      ) : (
+        <>
+          <p className={classes.noFlightsText}> Sorry, there are no flights on the selected date </p>
+          <div className={classes.btnCtn}>
+            <Link to="/">
+              <button className={classes.btnBack}> Back to Browser </button>
+            </Link>
+        </div>
+       </>
+      )}
     </div>
   );
+
 }
+
 
 export default FlightsListPage;
