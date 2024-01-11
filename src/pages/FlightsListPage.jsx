@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FlightsContext } from "../contexts/FlightsContext";
-import classes from "../styles/flightslist.module.css";
+import classes from "../styles/flightslistanddetails.module.css";
 import { Link, useLocation } from "react-router-dom";
 
 import americanLogo from "../images/american-logo.png";
@@ -12,7 +12,7 @@ import turkishLogo from "../images/turkish-logo.png";
 function FlightsListPage() {
   const location = useLocation();
   // {} ensures that the variables will be set to undefined if location.state is undefined
-  let { selectedOrigin, selectedDestination, date } = location.state || {};
+  let { selectedOrigin, selectedDestination, selectedDate } = location.state || {};
 
   // destructures flights from FlightsContext
   const { flights, calculateDuration, formatDate } = useContext(FlightsContext);
@@ -20,32 +20,28 @@ function FlightsListPage() {
   if (!location.state) {
     selectedOrigin = localStorage.getItem("selectedOrigin");
     selectedDestination = localStorage.getItem("selectedDestination");
-    date = localStorage.getItem("date");
+    selectedDate = localStorage.getItem("selectedDate");
   }
-
-  const originalDate = date || "";
-  const parts = originalDate.split("-"); // splits the date string by the hyphen
-  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
   const filteredFlights = flights.filter((flight) => {
     return (
       flight.departure_city === selectedOrigin &&
       flight.arrival_city === selectedDestination &&
-      flight.flight_date == date
+      flight.flight_date == selectedDate
     );
   });
 
   const airlineLogos = {
     "American Airlines": americanLogo,
     "Delta Air Lines": deltaLogo,
-    Emirates: emiratesLogo,
-    Iberia: iberiaLogo,
+    "Emirates": emiratesLogo,
+    "Iberia": iberiaLogo,
     "Turkish Airlines": turkishLogo,
   };
 
   return (
     <div className="mainCtn flightsList">
-      <h1> Available flights on {formattedDate}</h1>
+      <h1> Available flights on {formatDate(selectedDate)}</h1>
       {filteredFlights.map((flight) => {
         const { hours, mins } = calculateDuration(flight);
         return (

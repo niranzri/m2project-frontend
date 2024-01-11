@@ -21,9 +21,6 @@ html, body {
   font-family: 'Roboto', sans-serif;
   height: 100%;
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0;
   text-decoration: none;
   color: inherit;
   font-size: 18px;
@@ -44,6 +41,8 @@ html, body {
   margin-bottom: 60px;
   height: calc(100vh - 170px);
   overflow-y: auto; /* adds scroll if content overflows */
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .about {
@@ -89,9 +88,10 @@ html, body {
 
 h1 {
   color: white;
-  text-align: center;
+  display: flex;
+  justify-content: flex-start;
   font-size: 1.8rem;
-  padding-top: 70px;
+  padding-top: 10px;
 }
 
 h2 {
@@ -99,6 +99,7 @@ h2 {
   text-align: center;
   font-size: 1.8rem;
   padding: 5%;
+  display: flex
 }
 
 

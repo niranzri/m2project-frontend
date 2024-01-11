@@ -6,6 +6,7 @@
 
     margin: 1% 2%;
     padding: 2%;
+    max-width: 1500px;
     min-width: 1000px;
 
     background-color: white;
@@ -25,7 +26,6 @@
     width: 100%; 
     height: auto;
 }
-
 
 .detailsCtn {
     display: flex;

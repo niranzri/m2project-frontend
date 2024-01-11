@@ -122,6 +122,13 @@ function FlightsContextProvider({ children }) {
     return { hours, mins };
   };
 
+  const formatDate = (date) => {
+    const originalDate = date
+    const parts = originalDate.split("-"); // splits the date string by the hyphen
+    const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+    return formattedDate;
+  }
+
   return (
     <FlightsContext.Provider
       value={{
@@ -135,6 +142,7 @@ function FlightsContextProvider({ children }) {
         setNeedsUpdate,
         updateFlightNote,
         deleteFlightNote,
+        formatDate
       }}
     >
       {children}

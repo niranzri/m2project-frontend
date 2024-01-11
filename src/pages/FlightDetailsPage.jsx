@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FlightsContext } from "../contexts/FlightsContext";
 
-import classes from "../styles/flightslist.module.css";
+import classes from "../styles/flightslistanddetails.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
@@ -96,7 +96,6 @@ function FlightDetailsPage() {
                 />
               )}
             </button>
-            <p> Saved? {flight.isSaved?.toString() || "No"} </p>
           </div>
         </div>
       )}
