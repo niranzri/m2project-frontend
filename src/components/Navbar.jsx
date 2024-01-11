@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import classes from '../styles/navbar.module.css';
 import appLogo from '../images/logo.png';
+import appLogo2 from '../images/logo-2.png';
 
 function Navbar () {
     return (
         <nav>
             <div className={classes.logoCtn}> 
-                <img src={appLogo} alt="appLogo" className={classes.logo}/>
+                <img src={appLogo2} alt="appLogo" className={classes.logo}/>
             </div>
             <div className={classes.linksCtn}>
                 <NavLink to="/about" className={classes.link}> About </NavLink>

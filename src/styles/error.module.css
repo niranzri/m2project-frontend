@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: center;
     margin: 0;
-    height: 100vh;
     color: #08225a;
+    height: calc(100vh - 170px);
 }
 
 .text {
@@ -14,5 +14,12 @@
 
 .number {
     font-size: 5rem;
+}
+
+.errorMessage img {
+    margin-top: 10px;
+    width: 150px;
+    height: auto;
+    border-radius: 0%;
 }
   

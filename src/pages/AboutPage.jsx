@@ -1,6 +1,7 @@
 import classes from "../styles/about.module.css";
 import Noe from "../images/Noe.jpeg";
 import Jesus from "../images/Jesus.jpeg";
+
 function AboutPage() {
   return (
     <div className="mainCtn about">
