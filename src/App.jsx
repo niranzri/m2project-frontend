@@ -12,7 +12,6 @@ import FlightsListPage from "./pages/FlightsListPage";
 import FlightDetailsPage from "./pages/FlightDetailsPage";
 import MyFlightsPage from "./pages/MyFlightsPage";
 import { FlightsContext } from "./contexts/FlightsContext.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
 
 function App() {
   const { isLoading } = useContext(FlightsContext);
@@ -29,7 +28,6 @@ function App() {
         <Route path="/flights/:flightId" element={<FlightDetailsPage />} />
         <Route path="/myflights" element={<MyFlightsPage />} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/login" element={<LoginPage />} />
       </Routes>
       <Footer />
     </div>
