@@ -133,6 +133,8 @@ function FlightsContextProvider({ children }) {
         toggleSave,
         calculateDuration,
         setNeedsUpdate,
+        updateFlightNote,
+        deleteFlightNote,
       }}
     >
       {children}

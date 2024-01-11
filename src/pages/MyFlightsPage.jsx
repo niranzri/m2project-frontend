@@ -12,14 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function MyFlightsPage() {
-  const {
-    flights,
-    setFlights,
-    toggleSave,
-    updateFlightNote,
-    getFlights,
-    setNeedsUpdate,
-  } = useContext(FlightsContext);
+  const { flights, setFlights, toggleSave, updateFlightNote } =
+    useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
   const [notes, setNotes] = useState({}); // Added missing state
@@ -55,7 +49,7 @@ function MyFlightsPage() {
     console.log(flightId);
     const flightToUpdate = flights.find((flight) => flight.id === flightId);
     if (!flightToUpdate) return;
-    
+
     // Assuming each flight has only one note
     const updatedFlight = { ...flightToUpdate, note: [] };
 
