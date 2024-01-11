@@ -123,6 +123,28 @@ h3 {
   font-family: "Roboto", sans-serif;
 }
 
+.innerBottomCtn {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.buttonsCtn {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 10px;
+  flex-wrap: wrap;
+}
+
+.buttonsCtn button {
+  margin: 0 10px;
+}
+
+
 /*
 .btnCtn {
     display:flex;
