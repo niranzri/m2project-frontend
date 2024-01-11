@@ -82,53 +82,55 @@ function MyFlightsPage() {
   const { addFlightNote } = useContext(FlightsContext);
 
   const renderNoteButtons = (flight) => (
-    <>
-      {!editingNoteId && (
-        <button
-          type="button"
-          className={classes.btn}
-          onClick={() => setEditingNoteId(flight.id)}
-        >
-          <FontAwesomeIcon icon={faPen} /> {notes[flight.id] ? "Edit" : "Add"}{" "}
-          Travel Note
-        </button>
-      )}
-      {editingNoteId === flight.id && (
-        <>
-          <textarea
-            value={notes[flight.id] || ""}
-            className={classes.input}
-            onChange={(e) => handleNoteChange(flight.id, e.target.value)}
-          />
+    <div className={classes.innerBottomCtn}>
+        {notes[flight.id] && <p><span> Travel Note: </span>{notes[flight.id]}</p>}
+          <div className={classes.buttonsCtn}>
+          {!editingNoteId && (
           <button
             type="button"
             className={classes.btn}
-            onClick={() => saveNote(flight.id)}
+            onClick={() => setEditingNoteId(flight.id)}
           >
-            <FontAwesomeIcon icon={faCheck} size="sm" /> Save
+            <FontAwesomeIcon icon={faPen} /> {notes[flight.id] ? "Edit " : "Add "}
+            Travel Note
           </button>
-          <button
-            type="button"
-            className={classes.btn}
-            onClick={() => setEditingNoteId(null)}
-          >
-            <FontAwesomeIcon icon={faTimes} size="sm" /> Cancel
-          </button>
-        </>
-      )}
-      {notes[flight.id] && (
-        <div>
-          <p>Note: {notes[flight.id]}</p>
-          <button
-            type="button"
-            className={classes.btn}
-            onClick={() => removeNote(flight.id)}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} /> Delete
-          </button>
-        </div>
-      )}
-    </>
+        )}
+        {editingNoteId === flight.id && (
+          <>
+            <textarea
+              value={notes[flight.id] || ""}
+              className={classes.input}
+              onChange={(e) => handleNoteChange(flight.id, e.target.value)}
+            />
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={() => saveNote(flight.id)}
+            >
+              <FontAwesomeIcon icon={faCheck} size="sm" /> Save
+            </button>
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={() => setEditingNoteId(null)}
+            >
+              <FontAwesomeIcon icon={faTimes} size="sm" /> Cancel
+            </button>
+          </>
+        )}
+        {notes[flight.id] && (
+          <div>
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={() => removeNote(flight.id)}
+            >
+              <FontAwesomeIcon icon={faTrashAlt} /> Delete
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   );
 
   return (
@@ -171,10 +173,10 @@ function MyFlightsPage() {
                   </div>
                   <p>
                     {" "}
-                    <span>Airline: </span> {flight.airline}
+                    <span> Airline: </span> {flight.airline}
                   </p>
                   <p>
-                    <span>Price: </span>
+                    <span> Price: </span>
                     {flight.price} €
                   </p>
                 </div>
