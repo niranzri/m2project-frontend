@@ -44,6 +44,7 @@ function FlightsContextProvider({ children }) {
       })
     );
   };
+
   const addFlightNote = async (flightId, newNoteContent) => {
     try {
       // Create a new note object
@@ -81,6 +82,7 @@ function FlightsContextProvider({ children }) {
       console.error("Error adding flight note:", error);
     }
   };
+
   const updateFlightNote = async (flightId, noteIndex, updatedNote) => {
     try {
       const updatedFlights = flights.map((flight) => {
@@ -111,6 +113,7 @@ function FlightsContextProvider({ children }) {
       console.error("Error updating flight note:", error);
     }
   };
+
   const deleteFlightNote = async (flightId, noteId) => {
     try {
       // Update the flights array to remove the specific note
@@ -133,6 +136,102 @@ function FlightsContextProvider({ children }) {
       );
     } catch (error) {
       console.error("Error deleting flight note:", error);
+    }
+  };
+
+
+  // functions to modify airline reviews:
+  const addFlightReview = async (flightId, newReviewContent) => {
+    try {
+      // Create a new review object
+      const newReview = {
+        id: Date.now(), // Assuming the review ID is generated client-side for this example
+        content: newReviewContent,
+      };
+
+      // Send the new review to the server using POST request
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/flights/${flightId}/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newReview),
+        }
+      );
+
+      if (response.ok) {
+        const createdReview = await response.json();
+
+        // Update the local state with the new review
+        const updatedFlights = flights.map((flight) => {
+          if (flight.id === flightId) {
+            return { ...flight, airline_review: [...flight.airline_review, createdReview] };
+          }
+          return flight;
+        });
+
+        setFlights(updatedFlights);
+      }
+    } catch (error) {
+      console.error("Error adding airline review:", error);
+    }
+  };
+
+  const updateFlightReview = async (flightId, reviewIndex, updatedReview) => {
+    try {
+      const updatedFlights = flights.map((flight) => {
+        if (flight.id === flightId) {
+          const newReviews = [...flight.airline_review];
+          newReviews[reviewIndex] = updatedReview; // Update specific review
+          return { ...flight, airline_review: newReviews };
+        }
+        return flight;
+      });
+
+      setFlights(updatedFlights);
+
+      const flightToUpdate = updatedFlights.find(
+        (flight) => flight.id === flightId
+      );
+      console.log("Updating flight with payload:", flightToUpdate); // Log the payload
+
+      // Send the updated flight data to the server
+      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(flightToUpdate),
+      });
+    } catch (error) {
+      console.error("Error updating airline review:", error);
+    }
+  };
+
+  const deleteFlightReview = async (flightId, reviewId) => {
+    try {
+      // Update the flights array to remove the specific airline review
+      const updatedFlights = flights.map((flight) => {
+        if (flight.id === flightId) {
+          const updatedReviews = flight.airline_review.filter((review) => review.id !== reviewId);
+          return { ...flight, airline_review: updatedReviews };
+        }
+        return flight;
+      });
+
+      setFlights(updatedFlights);
+
+      // Send DELETE request to the server
+      await fetch(
+        `${import.meta.env.VITE_API_URL}/flights/${flightId}/reviews/${reviewId}`,
+        {
+          method: "DELETE",
+        }
+      );
+    } catch (error) {
+      console.error("Error deleting airline review:", error);
     }
   };
 
@@ -175,10 +274,13 @@ function FlightsContextProvider({ children }) {
         toggleSave,
         calculateDuration,
         setNeedsUpdate,
+        formatDate,
         updateFlightNote,
         deleteFlightNote,
-        formatDate,
         addFlightNote,
+        updateFlightReview,
+        deleteFlightReview,
+        addFlightReview,
       }}
     >
       {children}

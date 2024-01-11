@@ -12,12 +12,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function MyFlightsPage() {
-  const { flights, setFlights, toggleSave, updateFlightNote, formatDate } =
+  const { flights, setFlights, toggleSave, formatDate, updateFlightNote, addFlightNote, updateFlightReview, addFlightReview } =
     useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
   const [notes, setNotes] = useState({}); // Added missing state
+  const [reviews, setReviews] = useState({}); // Added missing state
   const [editingNoteId, setEditingNoteId] = useState(null); // Added missing state
+  const [editingReviewId, setEditingReviewId] = useState(null); // Added missing state
 
   useEffect(() => {
     const now = new Date();
@@ -50,6 +52,7 @@ function MyFlightsPage() {
     setEditingNoteId(null);
   };
 
+
   // Function to delete a note
   const removeNote = async (flightId) => {
     console.log(flightId);
@@ -79,8 +82,8 @@ function MyFlightsPage() {
       console.error("Error deleting flight note:", error);
     }
   };
-  const { addFlightNote } = useContext(FlightsContext);
 
+  // function to render the note buttons
   const renderNoteButtons = (flight) => (
     <div className={classes.innerBottomCtn}>
         {notes[flight.id] && <p><span> Travel Note: </span>{notes[flight.id]}</p>}
@@ -124,6 +127,110 @@ function MyFlightsPage() {
               type="button"
               className={classes.btn}
               onClick={() => removeNote(flight.id)}
+            >
+              <FontAwesomeIcon icon={faTrashAlt} /> Delete
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+
+  // functions airline reviews (past flights)
+  const handleReviewChange = (id, airline_review) => {
+    setReviews({ ...reviews, [id]: airline_review });
+  };
+
+  const saveReview = (flightId) => {
+    if (editingReviewId === null) {
+      // Add a new review
+      addFlightReview(flightId, reviews[flightId]);
+    } else {
+      // Update an existing review
+      const reviewIndex = flights
+        .find((flight) => flight.id === flightId)
+        .airline_review.findIndex((airline_review) => airline_review.id === editingReviewId);
+      updateFlightReview(flightId, reviewIndex, reviews[flightId]);
+    }
+    setEditingReviewId(null);
+  };
+
+  // function to delete a note
+  const removeReview = async (flightId) => {
+    console.log(flightId);
+    const flightToUpdate = flights.find((flight) => flight.id === flightId);
+    if (!flightToUpdate) return;
+
+    // Assuming each flight has only one review
+    const updatedFlight = { ...flightToUpdate, airline_review: [] };
+
+    try {
+      // Update the local state
+      setFlights(
+        flights.map((flight) =>
+          flight.id === flightId ? updatedFlight : flight
+        )
+      );
+
+      // Update the server
+      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedFlight),
+      });
+
+      location.reload();
+    } catch (error) {
+      console.error("Error deleting airline review:", error);
+    }
+  };
+
+
+  // function to render the review buttons
+  const renderReviewButtons = (flight) => (
+    <div className={classes.innerBottomCtn}>
+        {reviews[flight.id] && <p><span> Airline Review: </span>{reviews[flight.id]}</p>}
+          <div className={classes.buttonsCtn}>
+          {!editingReviewId && (
+          <button
+            type="button"
+            className={classes.btn}
+            onClick={() => setEditingReviewId(flight.id)}
+          >
+            <FontAwesomeIcon icon={faPen} /> {reviews[flight.id] ? "Edit " : "Add "}
+            Airline Review
+          </button>
+        )}
+        {editingReviewId === flight.id && (
+          <>
+            <textarea
+              value={reviews[flight.id] || ""}
+              className={classes.input}
+              onChange={(e) => handleReviewChange(flight.id, e.target.value)}
+            />
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={() => saveReview(flight.id)}
+            >
+              <FontAwesomeIcon icon={faCheck} size="sm" /> Save
+            </button>
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={() => setEditingReviewId(null)}
+            >
+              <FontAwesomeIcon icon={faTimes} size="sm" /> Cancel
+            </button>
+          </>
+        )}
+        {reviews[flight.id] && (
+          <div>
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={() => removeReview(flight.id)}
             >
               <FontAwesomeIcon icon={faTrashAlt} /> Delete
             </button>
@@ -203,7 +310,7 @@ function MyFlightsPage() {
                 </div>
               </div>
               <div className={classes.bottomCtn}>
-                {renderNoteButtons(flight)}
+                {renderReviewButtons(flight)}
               </div>
             </div>
           ))}
