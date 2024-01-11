@@ -44,6 +44,62 @@ function FlightsContextProvider({ children }) {
       })
     );
   };
+  const updateFlightNote = async (flightId, noteIndex, updatedNote) => {
+    try {
+      const updatedFlights = flights.map((flight) => {
+        if (flight.id === flightId) {
+          const newNotes = [...flight.note];
+          newNotes[noteIndex] = updatedNote; // Update specific note
+          return { ...flight, note: newNotes };
+        }
+        return flight;
+      });
+
+      setFlights(updatedFlights);
+
+      const flightToUpdate = updatedFlights.find(
+        (flight) => flight.id === flightId
+      );
+      console.log("Updating flight with payload:", flightToUpdate); // Log the payload
+
+      // Send the updated flight data to the server
+      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(flightToUpdate),
+      });
+    } catch (error) {
+      console.error("Error updating flight note:", error);
+    }
+  };
+  const deleteFlightNote = async (flightId, noteIndex) => {
+    try {
+      const updatedFlights = flights.map((flight) => {
+        if (flight.id === flightId) {
+          const updatedNotes = flight.note.filter(
+            (_, index) => index !== noteIndex
+          );
+          return { ...flight, note: updatedNotes };
+        }
+        return flight;
+      });
+
+      setFlights(updatedFlights);
+
+      // Update the server
+      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          updatedFlights.find((flight) => flight.id === flightId)
+        ),
+      });
+    } catch (error) {
+      console.error("Error deleting flight note:", error);
+    }
+  };
 
   const calculateDuration = (flight) => {
     // destructures departure and arrival time into hours and minutes and converts these to numbers

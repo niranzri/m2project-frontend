@@ -55,7 +55,7 @@ function MyFlightsPage() {
     console.log(flightId);
     const flightToUpdate = flights.find((flight) => flight.id === flightId);
     if (!flightToUpdate) return;
-
+    
     // Assuming each flight has only one note
     const updatedFlight = { ...flightToUpdate, note: [] };
 
