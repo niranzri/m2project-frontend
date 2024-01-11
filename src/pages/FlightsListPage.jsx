@@ -44,7 +44,7 @@ function FlightsListPage() {
   };
 
   return (
-    <div className="mainCtn">
+    <div className="mainCtn flightsList">
       <h1> Available flights on {formattedDate}</h1>
       {filteredFlights.map((flight) => {
         const { hours, mins } = calculateDuration(flight);
