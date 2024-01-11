@@ -44,6 +44,10 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.imageCtn p {
+    margin-left: 10px;
+}
+
 img {
     height: 100px;
     width: auto;

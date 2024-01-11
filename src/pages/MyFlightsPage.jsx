@@ -62,7 +62,6 @@ function MyFlightsPage() {
 
   // Function to delete a note
   const removeNote = async (flightId) => {
-    console.log(flightId);
     const flightToUpdate = flights.find((flight) => flight.id === flightId);
     if (!flightToUpdate) return;
 
@@ -167,7 +166,6 @@ function MyFlightsPage() {
 
   // function to delete an airline review
   const removeReview = async (flightId) => {
-    console.log(flightId);
     const flightToUpdate = flights.find((flight) => flight.id === flightId);
     if (!flightToUpdate) return;
 
