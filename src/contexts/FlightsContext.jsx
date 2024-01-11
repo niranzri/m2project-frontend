@@ -34,15 +34,30 @@ function FlightsContextProvider({ children }) {
     return oneFlight;
   };
 
-  const toggleSave = (flightId) => {
-    setFlights(
-      flights.map((flight) => {
-        if (flight.id === flightId) {
-          return { ...flight, isSaved: !flight.isSaved };
-        }
-        return flight;
-      })
+  const toggleSave = async (flightId) => {
+    const updatedFlights = flights.map((flight) => {
+      if (flight.id === flightId) {
+        return { ...flight, isSaved: !flight.isSaved };
+      }
+      return flight;
+    });
+
+    setFlights(updatedFlights);
+
+    // Find the flight that was updated
+    const flightToUpdate = updatedFlights.find(
+      (flight) => flight.id === flightId
     );
+
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(flightToUpdate),
+      });
+    } catch (error) {
+      console.error("Error updating flight:", error);
+    }
   };
 
   const addFlightNote = async (flightId, newNoteContent) => {
@@ -139,7 +154,6 @@ function FlightsContextProvider({ children }) {
     }
   };
 
-
   // functions to modify airline reviews:
   const addFlightReview = async (flightId, newReviewContent) => {
     try {
@@ -167,7 +181,10 @@ function FlightsContextProvider({ children }) {
         // Update the local state with the new review
         const updatedFlights = flights.map((flight) => {
           if (flight.id === flightId) {
-            return { ...flight, airline_review: [...flight.airline_review, createdReview] };
+            return {
+              ...flight,
+              airline_review: [...flight.airline_review, createdReview],
+            };
           }
           return flight;
         });
@@ -215,7 +232,9 @@ function FlightsContextProvider({ children }) {
       // Update the flights array to remove the specific airline review
       const updatedFlights = flights.map((flight) => {
         if (flight.id === flightId) {
-          const updatedReviews = flight.airline_review.filter((review) => review.id !== reviewId);
+          const updatedReviews = flight.airline_review.filter(
+            (review) => review.id !== reviewId
+          );
           return { ...flight, airline_review: updatedReviews };
         }
         return flight;
@@ -225,7 +244,9 @@ function FlightsContextProvider({ children }) {
 
       // Send DELETE request to the server
       await fetch(
-        `${import.meta.env.VITE_API_URL}/flights/${flightId}/reviews/${reviewId}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/flights/${flightId}/reviews/${reviewId}`,
         {
           method: "DELETE",
         }
