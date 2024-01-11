@@ -76,6 +76,7 @@ function FlightsContextProvider({ children }) {
   };
   const deleteFlightNote = async (flightId, noteIndex) => {
     try {
+      // Update the flights array to remove the note
       const updatedFlights = flights.map((flight) => {
         if (flight.id === flightId) {
           const updatedNotes = flight.note.filter(
@@ -88,13 +89,9 @@ function FlightsContextProvider({ children }) {
 
       setFlights(updatedFlights);
 
-      // Update the server
       await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
-        method: "PUT",
+        method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          updatedFlights.find((flight) => flight.id === flightId)
-        ),
       });
     } catch (error) {
       console.error("Error deleting flight note:", error);
