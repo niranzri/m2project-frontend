@@ -16,10 +16,17 @@ function MyFlightsPage() {
     useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
-  const [notes, setNotes] = useState({}); // Added missing state
-  const [reviews, setReviews] = useState({}); // Added missing state
   const [editingNoteId, setEditingNoteId] = useState(null); // Added missing state
   const [editingReviewId, setEditingReviewId] = useState(null); // Added missing state
+
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || {});
+  const [reviews, setReviews] = useState(JSON.parse(localStorage.getItem('reviews')) || {});
+
+  useEffect(() => {
+    // Save notes and reviews to localStorage whenever they change
+    localStorage.setItem('notes', JSON.stringify(notes));
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+  }, [notes, reviews]);
 
   useEffect(() => {
     const now = new Date();
@@ -77,7 +84,9 @@ function MyFlightsPage() {
         body: JSON.stringify(updatedFlight),
       });
 
+      localStorage.removeItem('notes')
       location.reload();
+
     } catch (error) {
       console.error("Error deleting flight note:", error);
     }
@@ -156,7 +165,7 @@ function MyFlightsPage() {
     setEditingReviewId(null);
   };
 
-  // function to delete a note
+  // function to delete an airline review
   const removeReview = async (flightId) => {
     console.log(flightId);
     const flightToUpdate = flights.find((flight) => flight.id === flightId);
@@ -180,7 +189,9 @@ function MyFlightsPage() {
         body: JSON.stringify(updatedFlight),
       });
 
+      localStorage.removeItem('reviews')
       location.reload();
+
     } catch (error) {
       console.error("Error deleting airline review:", error);
     }
