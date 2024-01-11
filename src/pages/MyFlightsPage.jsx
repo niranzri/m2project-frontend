@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function MyFlightsPage() {
-  const { flights, setFlights, toggleSave, updateFlightNote } =
+  const { flights, setFlights, toggleSave, updateFlightNote, formatDate } =
     useContext(FlightsContext);
   const [pastFlights, setPastFlights] = useState([]);
   const [upcomingFlights, setUpcomingFlights] = useState([]);
@@ -128,7 +128,7 @@ function MyFlightsPage() {
                 <p>Arrival city: {flight.arrival_city}</p>
                 <p>Arrival airport: {flight.arrival_airport}</p>
                 <p>Arrival time: {flight.arrival_time}h</p>
-                <p>Flight date: {flight.flight_date}</p>
+                <p>Flight date: {formatDate(flight.flight_date)}</p>
                 <p>Airline: {flight.airline}</p>
                 <p>Price: {flight.price} €</p>
               </div>
@@ -168,7 +168,7 @@ function MyFlightsPage() {
                 <p>Arrival city: {flight.arrival_city}</p>
                 <p>Arrival airport: {flight.arrival_airport}</p>
                 <p>Arrival time: {flight.arrival_time}h</p>
-                <p>Flight date: {flight.flight_date}</p>
+                <p>Flight date: {formatDate(flight.flight_date)}</p>
                 <p>Airline: {flight.airline}</p>
                 <p>Price: {flight.price} €</p>
               </div>

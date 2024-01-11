@@ -6,6 +6,7 @@
 
     margin: 1% 2%;
     padding: 2%;
+    max-width: 1500px;
     min-width: 1000px;
 
     background-color: white;
@@ -25,7 +26,6 @@
     width: 100%; 
     height: auto;
 }
-
 
 .detailsCtn {
     display: flex;
@@ -89,3 +89,11 @@ p span {
 .btnBack:hover {
     background-color: #529eee; 
 }
+
+.noFlightsText {
+    padding: 50px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.7rem;
+    color: white;
+}
+

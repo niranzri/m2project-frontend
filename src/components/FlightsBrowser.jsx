@@ -10,31 +10,28 @@ function FlightsBrowser () {
 
     const [selectedOrigin, setSelectedOrigin] = useState ('')
     const [selectedDestination, setSelectedDestination] = useState ('')
-    const [date, setDate] = useState ('')
+    const [selectedDate, setDate] = useState ('')
 
     const navigate = useNavigate();
 
-    // not necessary b/c the Select component automatically handles the selection of options
-    //const handleOriginInput = event => setOrigin(event.target.value);
-    //const handleDestinationInput = event => setDestination(event.target.value);
     const handleDateInput = event => setDate(event.target.value);
 
     const handleSubmit = event => {
         event.preventDefault();
         //console.log("Selected origin: ", selectedOrigin.value);
         //console.log("Selected destination: ", selectedDestination.value);
-        console.log("Selected date: ", date);
+        //console.log("Selected date: ", selectedDate);
         navigate('/flights', {
             state: {
                 selectedOrigin: selectedOrigin.value,
                 selectedDestination: selectedDestination.value,
-                date: date,
+                selectedDate: selectedDate,
             }
         })
 
         localStorage.setItem('selectedOrigin', selectedOrigin.value);
         localStorage.setItem('selectedDestination', selectedDestination.value);
-        localStorage.setItem('date', date);
+        localStorage.setItem('selectedDate', selectedDate);
     }
 
     // arrays of unique origins and destinations
@@ -77,8 +74,8 @@ function FlightsBrowser () {
                     <label> Date </label>
                     <input
                         type="date"
-                        name="date"
-                        value={date}
+                        name="selectedDate"
+                        value={selectedDate}
                         onChange={handleDateInput}
                     />
                 </div>
