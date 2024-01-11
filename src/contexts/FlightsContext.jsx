@@ -44,6 +44,43 @@ function FlightsContextProvider({ children }) {
       })
     );
   };
+  const addFlightNote = async (flightId, newNoteContent) => {
+    try {
+      // Create a new note object
+      const newNote = {
+        id: Date.now(), // Assuming the note ID is generated client-side for this example
+        content: newNoteContent,
+      };
+
+      // Send the new note to the server using POST request
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/flights/${flightId}/notes`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newNote),
+        }
+      );
+
+      if (response.ok) {
+        const createdNote = await response.json();
+
+        // Update the local state with the new note
+        const updatedFlights = flights.map((flight) => {
+          if (flight.id === flightId) {
+            return { ...flight, note: [...flight.note, createdNote] };
+          }
+          return flight;
+        });
+
+        setFlights(updatedFlights);
+      }
+    } catch (error) {
+      console.error("Error adding flight note:", error);
+    }
+  };
   const updateFlightNote = async (flightId, noteIndex, updatedNote) => {
     try {
       const updatedFlights = flights.map((flight) => {
@@ -74,14 +111,12 @@ function FlightsContextProvider({ children }) {
       console.error("Error updating flight note:", error);
     }
   };
-  const deleteFlightNote = async (flightId, noteIndex) => {
+  const deleteFlightNote = async (flightId, noteId) => {
     try {
-      // Update the flights array to remove the note
+      // Update the flights array to remove the specific note
       const updatedFlights = flights.map((flight) => {
         if (flight.id === flightId) {
-          const updatedNotes = flight.note.filter(
-            (_, index) => index !== noteIndex
-          );
+          const updatedNotes = flight.note.filter((note) => note.id !== noteId);
           return { ...flight, note: updatedNotes };
         }
         return flight;
@@ -89,10 +124,13 @@ function FlightsContextProvider({ children }) {
 
       setFlights(updatedFlights);
 
-      await fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
+      // Send DELETE request to the server
+      await fetch(
+        `${import.meta.env.VITE_API_URL}/flights/${flightId}/notes/${noteId}`,
+        {
+          method: "DELETE",
+        }
+      );
     } catch (error) {
       console.error("Error deleting flight note:", error);
     }
@@ -120,11 +158,11 @@ function FlightsContextProvider({ children }) {
   };
 
   const formatDate = (date) => {
-    const originalDate = date
+    const originalDate = date;
     const parts = originalDate.split("-"); // splits the date string by the hyphen
     const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
     return formattedDate;
-  }
+  };
 
   return (
     <FlightsContext.Provider
@@ -139,7 +177,8 @@ function FlightsContextProvider({ children }) {
         setNeedsUpdate,
         updateFlightNote,
         deleteFlightNote,
-        formatDate
+        formatDate,
+        addFlightNote,
       }}
     >
       {children}

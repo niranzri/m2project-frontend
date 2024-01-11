@@ -37,10 +37,16 @@ function MyFlightsPage() {
   };
 
   const saveNote = (flightId) => {
-    const noteIndex = flights
-      .find((flight) => flight.id === flightId)
-      .note.findIndex((note) => note.id === editingNoteId);
-    updateFlightNote(flightId, noteIndex, notes[flightId]);
+    if (editingNoteId === null) {
+      // Add a new note
+      addFlightNote(flightId, notes[flightId]);
+    } else {
+      // Update an existing note
+      const noteIndex = flights
+        .find((flight) => flight.id === flightId)
+        .note.findIndex((note) => note.id === editingNoteId);
+      updateFlightNote(flightId, noteIndex, notes[flightId]);
+    }
     setEditingNoteId(null);
   };
 
@@ -73,6 +79,7 @@ function MyFlightsPage() {
       console.error("Error deleting flight note:", error);
     }
   };
+  const { addFlightNote } = useContext(FlightsContext);
 
   const renderNoteButtons = (flight) => (
     <>
