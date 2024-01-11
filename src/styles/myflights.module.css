@@ -51,6 +51,19 @@ h3 {
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+}
+
+.topCtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.flightInfo {
+  flex: 9;
 }
 
 .contentCtn {
@@ -58,12 +71,68 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  //font-family: "Open Sans", sans-serif;
-  line-height: 1.5;
-  padding-top: 10px;
+  font-family: "Open Sans", sans-serif;
+  padding: 20px 0;
 }
 
+.starCtn {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
 
+.iconStar {
+  background-color: transparent;
+}
+
+.iconStar:hover {
+  background-color: transparent;
+}
+
+.bottomCtn {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.btn {
+  margin: 0;
+  background-color: #08225a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+}
+
+.btn:hover {
+  background-color: #529eee;
+}
+
+.input {
+  background-color: #cce5ec;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+}
+
+/*
+.btnCtn {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+*/
+
+/*
 .flight-detail-button {
   padding: 10px 20px;
   margin-top: 20px;
@@ -78,19 +147,4 @@ h3 {
 
 .flight-detail-button:hover {
   background-color: #45a049;
-}
-
-.starCtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-}
-
-.iconStar {
-  background-color: transparent;
-}
-
-.iconStar:hover {
-  background-color: transparent;
-}
+}*/
