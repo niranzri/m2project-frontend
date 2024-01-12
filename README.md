@@ -1,6 +1,6 @@
 #  FlyZest flights browser
 
-## [Link to App ](https://flyzestfrontend.netlify.app/)
+## [Link to deployed app](https://flyzestfrontend.netlify.app/)
 
 # Project Description
 
@@ -65,8 +65,8 @@ The Error Page displays a 404 error, along with a humorous image of a plane cras
 # Extra Links 
 
 ### Slides
-[Link](https://docs.google.com/presentation/d/1noDRgiKQhqksLUwoKEyUr6kUZ8L9FziTVdOgVLsWPr4/edit#slide=id.gf641ff9b39_1_0)
+[Link to presentation slides](https://docs.google.com/presentation/d/1noDRgiKQhqksLUwoKEyUr6kUZ8L9FziTVdOgVLsWPr4/edit#slide=id.gf641ff9b39_1_0)
 
 ## Repo
-- Front-end repo: [Link](https://github.com/niranzri/m2project-frontend)
-- Back-end repo: [Link](https://github.com/niranzri/m2project-backend)
+- [Link to frontend repo](https://github.com/niranzri/m2project-frontend)
+- [Link to backend repo](https://github.com/niranzri/m2project-backend)
