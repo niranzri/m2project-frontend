@@ -1,6 +1,6 @@
 #  FlyZest flights browser
 
-## [Check the APP!]  [Link](https://flyzestfrontend.netlify.app/)
+## [Link to App ](https://flyzestfrontend.netlify.app/)
 
 # Project Description
 
@@ -54,7 +54,7 @@ The Error Page displays a 404 error, along with a humorous image of a plane cras
 - Use an external API, rather than a REST API, to provide a larger set of data and thereby enhance the functionality of the application. 
 - Implement a login feature.
 - Implement a filter feature (by flight departure time and price) in the Flights List Page.
-- Introduce 'airline reviews' as a separate object with multiple properties, such as 'comment' and 'rating'. Display reviews and average rating on a separate page.
+- Introduce 'airline reviews' as a separate object with multiple properties, such as 'comment' and 'rating'. Display airlines' reviews and average ratings on a separate page.
 
  
 # Technologies Used
@@ -65,9 +65,8 @@ The Error Page displays a 404 error, along with a humorous image of a plane cras
 # Extra Links 
 
 ### Slides
-<!-->
-[Link](https://docs.google.com/presentation/d/1MjfAwMPSK35rCAN8oYT9O7VOGWk-ixrmc2uwcN1P-w0/edit#slide=id.p2) -->
+[Link](https://docs.google.com/presentation/d/1noDRgiKQhqksLUwoKEyUr6kUZ8L9FziTVdOgVLsWPr4/edit#slide=id.gf641ff9b39_1_0)
 
 ## Repo
-front-end repo: [Link](https://github.com/niranzri/m2project-frontend)
-back-end repo: [Link](https://github.com/niranzri/m2project-backend)
+- Front-end repo: [Link](https://github.com/niranzri/m2project-frontend)
+- Back-end repo: [Link](https://github.com/niranzri/m2project-backend)
