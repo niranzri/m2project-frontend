@@ -16,6 +16,7 @@ function AboutPage() {
             soar above the rest, connecting people and places with Spanish
             warmth and reliability.
           </p>
+          <br></br>
           <p>
             Your journey matters to us, and we are committed to making it
             memorable with FlyZest.

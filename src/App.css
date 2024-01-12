@@ -8,15 +8,6 @@
   font-size: 18px;
 }
 
-/*
-font-family: 'Abel', sans-serif;
-font-family: 'Big Shoulders Display', sans-serif;
-font-family: 'Big Shoulders Stencil Display', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-family: 'Oswald', sans-serif;
-font-family: 'Roboto', sans-serif;
-*/
-
 html, body {
   font-family: 'Roboto', sans-serif;
   height: 100%;
@@ -65,7 +56,7 @@ html, body {
 .flightsList, .flightDetails {
   background-image: url('./images/cover5.jpg');
   background-position: center;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -74,7 +65,7 @@ html, body {
 .myFlights {
   background-image: url('./images/cover1.jpg');
   background-position: center;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -90,16 +81,18 @@ h1 {
   color: white;
   display: flex;
   justify-content: flex-start;
+  text-align: center;
   font-size: 1.8rem;
-  padding-top: 10px;
+  padding: 3%;
 }
 
 h2 {
   color: #08225a;
+  display: flex;
+  justify-content: flex-start;
   text-align: center;
   font-size: 1.8rem;
   padding: 5%;
-  display: flex
 }
 
 

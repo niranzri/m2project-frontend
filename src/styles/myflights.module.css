@@ -1,18 +1,3 @@
-/*.myFlightsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-}*/
-
-/*
-h2 {
-  font-family: "Open Sans", sans-serif;
-  font-size: 2em;
-  margin-bottom: 20px;
-}*/
-
 h3 {
   color: white;
 }
@@ -143,29 +128,3 @@ h3 {
 .buttonsCtn button {
   margin: 0 10px;
 }
-
-
-/*
-.btnCtn {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-*/
-
-/*
-.flight-detail-button {
-  padding: 10px 20px;
-  margin-top: 20px;
-  font-family: "Abel", sans-serif;
-  font-size: 1em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-}
-
-.flight-detail-button:hover {
-  background-color: #45a049;
-}*/
