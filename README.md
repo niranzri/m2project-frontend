@@ -8,44 +8,54 @@ Our project is a Single Page Application (SPA) website made with React. It serve
 
 # App Functionalities 
 
-The FlyZest web app contains 5 different pages:
+The FlyZest web app contains 6 different pages:
 
 ## Home Page 
 
-To be completed.
-
-<!--The Home Page is the first screen that the active user sees when openening the app. This page displays a list of tasks which were previously created by the user. Besides offering an overview of the created tasks list, this page allows the user to edit or delete the existing tasks, and add new tasks. When clicking on the task text, the user is led to a dynamic page that displays the task details, namely, the name and status of completion.
-
-![homePage](./react-app/src/assets/homePage.png)-->
+The Home Page is the initial screen that users see upon opening the app. This page features a flight browser, enabling users to choose from a predefined list of origins and destinations. As for flight dates, the JSON server only contains flights from 10-01-2024 to 13-01-2024. If users select dates outside of this range, they will be prompted to return to the flight browser and select a new date. 
+When users click on the search button, they are redirected to the Flights List Page. 
+![HomePage](./src/images/homePage.png)
 
 ## Flights List Page
 
-To be completed.
-
-<!--As mentioned above, the user has the choice to delete the completed or unwanted tasks from the task list. Once the user deletes a task, the task is moved to the Task History Page, which the user can acces through the sidebar. In the Task History page, the user has an overview of the deleted tasks. This page offers the user the choice to undo the task and update it as an active task again in the task list.
-![taskHistory](./react-app/src/assets/taskHistory.png)-->
+The Flights List Page displays a list of flights that match the user's search criteria. 
+Each flight card displays the following information: the logo of the airline operating the flight, flight departure and arrival times, flight departure airport and city, flight arrival airport and city, flight duration, and price. When users click on a flight of interest, they are dynamically redirected to the Flight Details Page. 
+![FlightsListPage](./src/images/flightsListPage.png)
 
 ## Flight Details Page
 
-To be completed.
+The Flight Details Page displays information about the selected flight, identical to the information presented on the Flights List Page. On the right side of the flight card, a star button allows users to save or remove the flight from the My Flights Page. Additionally, a button is provided for users to navigate back to the Flights List Page.
+![FlightDetailsPage](./src/images/flightDetailsPage.png)
 
 ## My Flights Page
 
-To be completed.
+The My Flights Page presents the flights that the user has saved, including both past and upcoming flights. Each flight card has the following features:
+
+- It displays the flight information.
+- It allows the user to remove a specific flight from their saved list.
+- For past flights, it enables the user to add, edit, or delete an airline review.
+- For upcoming flights, it enables the user to add, edit, or delete a travel note.
+![MyFlightsPage](./src/images/myFlightsPage.png)
 
 ## About Page 
 
 The About Page displays a little bit of information about the fictitious company, FlyZest, founded by the app creators: Jesús Cidoncha Berlanga, and Noelia Iranzo Ribera.
-<!--![aboutPage](./react-app/src/assets/aboutPage.png)-->
+![aboutPage](./src/images/aboutPage.png)
 
 ## Error Page
 
 The Error Page displays a 404 error, along with a humorous image of a plane crashing, consistent with the website's theme.  
-
+![errorPage](./src/images/errorPage.png)
 
 ## Backlog Functionalities
 
-To be completed.
+- Glitch: Fix the DELETE (CRUD) operation so that it doesn't require a page reload.
+- Glitch: Modify the DELETE operation to handle item-specific changes, instead of deleting all travel notes or airline reviews.
+- Use an external API, rather than a REST API, to provide a larger set of data and thereby enhance the functionality of the application. 
+- Implement a login feature.
+- Implement a filter feature (by flight departure time and price) in the Flights List Page.
+- Introduce 'airline reviews' as a separate object with multiple properties, such as 'comment' and 'rating'. Display reviews and average rating on a separate page.
+
  
 # Technologies Used
 - React
